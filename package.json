@@ -1,0 +1,17 @@
+{
+  "name": "todo_flutter_arch",
+  "version": "1.0.0",
+  "description": "- [Архитекрура](#arch)",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "build-models": "flutter pub run build_runner build --delete-conflicting-outputs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
