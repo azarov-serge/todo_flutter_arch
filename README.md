@@ -1,16 +1,96 @@
-# todo_arch
+# ToDo (архитектура для Flutter проектов)
 
-A new Flutter project.
+- [Архитекрура](#arch)
 
-## Getting Started
+  - [App](#app)
 
-This project is a starting point for a Flutter application.
+    - [Роутер (маршрутизация страниц)](#app-router)
+    - [Store (хранилище приложения)](#store)
 
-A few resources to get you started if this is your first Flutter project:
+  - [Models](#models)
+  - [Pages (страницы)](#pages)
+  - [Widgets](#widgets)
+  - [Shared](#shared)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## <a id="arch"></a>Архитекрура
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+За основу взята [FSD](https://feature-sliced.design/ru/docs)
+Слои - это первый уровень организационной иерархии. Их цель - разделить код на основе того, сколько ответственности ему требуется и от скольких других модулей в приложении он зависит.
+
+Каждый слой несет в себе особый семантический смысл, помогающий определить, какую ответственность следует возложить на модуль в вашем коде.
+
+Дерево файловой системы с одной корневой папкой src и подпапками: app, pages, components, entities, shared.
+
+- App (Приложение)
+- Pages (Страницы)
+- Widgets (Components / Компоненты)
+- Models (Entities / Сущности / Домены)
+- Shared (Общий)
+
+### Основной файл
+
+`/lib/main.dart` - инициация приложения + подключение store.
+
+### <a id="app"></a>Application
+
+`/lib/application/application.dart`
+Cодержит:
+
+#### <a id="app-router"></a>Роутер (маршрутизация страниц)
+
+- `/lib/application/router.dart` - маршрутизация страниц
+
+#### <a id="store"></a>Store (хранилище приложения)
+
+Используется Redux (`/lib/application/store`).
+Содержит хранилища:
+
+- `auth` - информация об авторизации + состояния загрузки и ошибки.
+- `user` - инвормация о пользователе + состояния загрузки и ошибки.
+- `tasks` - информация о задачах + состояния загрузки и ошибки.
+- `categories` - информация о категориях + состояния загрузки и ошибки.
+
+### <a id="models"></a>Models
+
+Понятия из реального мира, которые вместе образуют суть проекта. Как правило, это термины, которые бизнес использует для описания продукта. Содержит интерфейсы:
+
+- `UserModel`
+- `TaskModel`
+- `CategoryModel`
+
+### <a id="pages"></a>Pages (Страницы)
+
+Полноценные страницы для страничных приложений (например, веб-сайтов) или экраны/активности для экранных приложений (например, мобильных приложений).
+
+- `/lib/pages/sign_in` - авторизация.
+- `/lib/pages/sign_up` - регистрация.
+- `/lib/pages/home_page` - управление рассылками.
+- `/lib/pages/tasks_page` - страница с аналитикой.
+- `/lib/pages/categories_page` - push-уведомления.
+
+### <a id="widgets"></a>Widgets
+
+Самодостаточные блоки пользовательского интерфейса возникли из композиции единиц более низкого уровня, таких как сущности и функции.
+
+Этот слой предоставляет возможность заполнить слоты, оставленные в интерфейсе сущностей, другими сущностями и интерактивными элементами из фич. Поэтому обычно на этом слое не размещается бизнес-логика, вместо этого она хранится в фичах. Каждый слайс на этом слое содержит готовые к использованию компоненты пользовательского интерфейса и иногда не-бизнес-логику, например, жесты, взаимодействие с клавиатурой и т.д.
+
+Иногда удобнее разместить бизнес-логику на этом слое. Зачастую, это происходит тогда, когда виджет имеет довольно много интерактивности (например, интерактивные таблицы) и бизнес-логика в нём не переиспользуется.
+
+`/lib/widgets` - набор компонентов c логикой (могут состоять из простых компонентов).
+
+### <a id="shared"></a>Shared
+
+Изолированные модули, компоненты и абстракции, отдельные от специфики проекта или бизнеса.
+Содержит:
+
+- `/lib/shared/ui_kit` - набор простых компонентов.
+- `/lib/shared/blocs` - блоки приложения.
+- `/lib/shared/utils` - утилиты.
+- `/lib/shared/di` - DI проекта.
+
+- Сервисы:
+
+  - `/lib/shared/services/auth_service/auth_service_impl.dart` - сервис авторизации.
+  - `/lib/shared/services/user_service/user_service_impl.dart` - сервис по работе с пользовательскими данными.
+  - `/lib/shared/services/tasks_service/tasks_service_impl.dart` - сервис по работе с задачами.
+  - `/lib/shared/services/category_service/category_service_impl.dart` - сервис по работе с категориями.
