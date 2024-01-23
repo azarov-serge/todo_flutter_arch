@@ -16,7 +16,7 @@ class RequestModel with _$RequestModel {
     /// url ресурса
     @JsonKey(name: 'url') required String url,
 
-    /// qyery параметры (?query=params)
+    /// query параметры (?query=params)
     @JsonKey(name: 'params') @Default({}) Map<String, String> params,
 
     /// headers - заголовки
