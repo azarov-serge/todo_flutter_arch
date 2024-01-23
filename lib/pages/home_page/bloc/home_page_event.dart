@@ -8,5 +8,7 @@ class HomePageEvent with _$HomePageEvent {
 
   const factory HomePageEvent.loadInitialData() = _LoadInitialDataEvent;
 
+  const factory HomePageEvent.clearError() = _ClearErrorEvent;
+
   const factory HomePageEvent.signOut() = _SignOutEvent;
 }

@@ -7,10 +7,9 @@ import 'package:redux/redux.dart';
 import 'package:bloc/bloc.dart';
 
 import 'package:todo/application/store/app_state.dart';
-import 'package:todo/shared/blocs/task/task_bloc.dart';
-import 'package:todo/shared/blocs/user/user_block.dart';
+
+import 'package:todo/shared/blocs/task/task.dart';
 import 'package:todo/shared/di/di.dart';
-import 'package:todo/shared/services/services.dart';
 
 import 'tasks_page_state.dart';
 
@@ -19,8 +18,7 @@ part 'tasks_page_bloc.freezed.dart';
 
 class TasksPageBloc extends Bloc<TasksPageEvent, TasksPageState> {
   final Store<AppState> store;
-  final TaskBloc taskBloc = getIt();
-  final UserBloc userBloc = getIt();
+  final TaskGetListBloc tasksBloc = getIt();
 
   late final StreamSubscription<AppState> _storeListener;
 
@@ -37,13 +35,12 @@ class TasksPageBloc extends Bloc<TasksPageEvent, TasksPageState> {
       add(TasksPageEvent.changeState(appState: appState));
     });
 
-    final tasksResouce = taskBloc.state.getListResource;
-
     // ignore: invalid_use_of_visible_for_testing_member
     emit(
       state.copyWith(
-        loading: tasksResouce.loading,
-        tasks: tasksResouce.data ?? state.tasks,
+        loading: tasksBloc.state.loading,
+        tasks: tasksBloc.state.tasks,
+        error: tasksBloc.state.error,
       ),
     );
   }
@@ -56,18 +53,16 @@ class TasksPageBloc extends Bloc<TasksPageEvent, TasksPageState> {
   }
 
   void _changeState(_ChangeStateEvent event, emit) {
-    final tasksResouce = taskBloc.state.getListResource;
-
     emit(
       state.copyWith(
-        loading: tasksResouce.loading,
-        tasks: tasksResouce.data ?? state.tasks,
-        error: tasksResouce.error,
+        loading: tasksBloc.state.loading,
+        tasks: tasksBloc.state.tasks,
+        error: tasksBloc.state.error,
       ),
     );
   }
 
   void _clearError(_ClearErrorEvent event, emit) {
-    taskBloc.add(TaskEvent.clearResourceError(taskGetListRequest.copyWith()));
+    tasksBloc.add(const TaskGetListEvent.clearError());
   }
 }

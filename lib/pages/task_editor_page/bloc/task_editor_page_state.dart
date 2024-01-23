@@ -8,6 +8,7 @@ part 'task_editor_page_state.freezed.dart';
 class TaskEditorPageState with _$TaskEditorPageState {
   const factory TaskEditorPageState({
     @Default('') String id,
+    @Default(false) bool loaded,
     @Default(false) bool loading,
     TaskModel? task,
     @Default('') String error,

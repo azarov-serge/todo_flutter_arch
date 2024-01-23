@@ -8,6 +8,9 @@ import 'package:todo/pages/sign_up_page/bloc/sign_up_page_bloc.dart';
 import 'package:todo/pages/tasks_page/bloc/tasks_page_bloc.dart';
 import 'package:todo/pages/task_editor_page/bloc/task_editor_page_bloc.dart';
 
+import 'package:todo/shared/blocs/auth/auth.dart';
+import 'package:todo/shared/blocs/task/task.dart';
+
 const String homeRoute = '/';
 
 const String tasksRoute = '/tasks';
@@ -48,8 +51,10 @@ class AppRouter {
 
         return MaterialPageRoute(
           builder: (_) => BlocProvider<TaskEditorPageBloc>(
-            create: (BuildContext context) => TaskEditorPageBloc.create()
-              ..add(
+            create: (BuildContext context) => TaskEditorPageBloc.create(
+              taskCreateBloc: TaskCreateBloc.create(),
+              taskUpdateBloc: TaskUpdateBloc.create(),
+            )..add(
                 TaskEditorPageEvent.init(id),
               ),
             child: const TaskEditorPage(),
@@ -59,7 +64,9 @@ class AppRouter {
       case signInRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider<SignInPageBloc>(
-            create: (BuildContext context) => SignInPageBloc.create(),
+            create: (BuildContext context) => SignInPageBloc.create(
+              signInBloc: SignInBloc.create(),
+            ),
             child: const SignInPage(),
           ),
         );
@@ -67,7 +74,9 @@ class AppRouter {
       case signUpRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider<SignUpPageBloc>(
-            create: (BuildContext context) => SignUpPageBloc.create(),
+            create: (BuildContext context) => SignUpPageBloc.create(
+              signUpBloc: SignUpBloc.create(),
+            ),
             child: const SignUpPage(),
           ),
         );

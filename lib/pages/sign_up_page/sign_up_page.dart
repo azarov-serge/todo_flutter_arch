@@ -77,6 +77,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       //login
                       TextField(
                         controller: _loginController,
+                        enabled: !state.loading,
                         decoration: const InputDecoration(
                           filled: true,
                           hintText: 'Login',
@@ -87,6 +88,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                       TextField(
                         controller: _passwordController,
+                        enabled: !state.loading,
                         obscureText: true,
                         focusNode: _passwordFocusNode,
                         decoration: const InputDecoration(
@@ -130,9 +132,14 @@ class _SignUpPageState extends State<SignUpPage> {
       builder: (ctx) => AlertDialog(
         content: Text(message),
         actions: [
-          ElevatedButton(
-            onPressed: () => onPressed(ctx),
-            child: const Text('Ok'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () => onPressed(ctx),
+                child: const Text('Ok'),
+              ),
+            ],
           ),
         ],
       ),

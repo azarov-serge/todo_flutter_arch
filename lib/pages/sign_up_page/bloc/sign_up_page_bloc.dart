@@ -7,9 +7,9 @@ import 'package:redux/redux.dart';
 import 'package:bloc/bloc.dart';
 
 import 'package:todo/application/store/app_state.dart';
-import 'package:todo/models/models.dart';
-import 'package:todo/shared/blocs/auth/auth_bloc.dart';
-import 'package:todo/shared/blocs/user/user_block.dart';
+
+import 'package:todo/shared/blocs/auth/auth.dart';
+import 'package:todo/shared/blocs/user/user.dart';
 import 'package:todo/shared/constants/global.dart';
 import 'package:todo/shared/di/di.dart';
 
@@ -20,17 +20,21 @@ part 'sign_up_page_bloc.freezed.dart';
 
 class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
   final Store<AppState> store;
-  final AuthBloc authBloc = getIt();
-  final UserBloc userBloc = getIt();
+  final SignUpBloc signUpBloc;
+
+  final UserGetInfoBloc userBloc = getIt();
   bool _isSignUp = false;
 
   late final StreamSubscription<AppState> _storeListener;
 
-  factory SignUpPageBloc.create() => SignUpPageBloc(
+  factory SignUpPageBloc.create({required SignUpBloc signUpBloc}) =>
+      SignUpPageBloc(
         store: getIt.get(),
+        signUpBloc: signUpBloc,
       );
 
-  SignUpPageBloc({required this.store}) : super(const SignUpPageState()) {
+  SignUpPageBloc({required this.store, required this.signUpBloc})
+      : super(const SignUpPageState()) {
     on<_ChangeStateEvent>(_changeState);
 
     on<_SignUpEvent>(_signUp);
@@ -49,63 +53,57 @@ class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
 
   void _changeState(_ChangeStateEvent event, emit) {
     String error = '';
-    final signUpRequest = authBloc.state.signUpResource;
-    final userResource = userBloc.state.fetchUserResource;
 
-    if (signUpRequest.error.isNotEmpty) {
-      error = error + signUpRequest.error;
+    if (signUpBloc.state.error.isNotEmpty) {
+      error = error + signUpBloc.state.error;
     }
 
-    if (userResource.error.isNotEmpty) {
-      error = '$error\n ${userResource.error}';
+    if (userBloc.state.error.isNotEmpty) {
+      error = '$error\n ${userBloc.state.error}';
     }
-
-    final signUpLoading = signUpRequest.loading;
-    final signUpLoaded = signUpRequest.loaded;
-
-    final userLoaded = userResource.loaded;
-    final userLoading = userResource.loading;
-
-    final UserModel? user = userBloc.state.user;
-    final userId = signUpRequest.data;
 
     // Если авторизован, но нет пользователя, загружаем инфу по пользователю (или другие данные на старте проекта)
-    if (signUpLoaded == true &&
-        userId != null &&
-        !userLoading &&
-        !userLoaded &&
+    if (signUpBloc.state.loaded &&
+        signUpBloc.state.userId.isNotEmpty &&
+        !userBloc.state.loading &&
+        !userBloc.state.loaded &&
         !_isSignUp) {
       _isSignUp = true;
-      userBloc.add(UserEvent.fetchUser(userId));
+      userBloc.add(UserGetInfoEvent.fetchUser(signUpBloc.state.userId));
 
       return;
     }
 
     // Если произошел выход, очистить состояния
-    if (userLoaded == true && _isSignUp && user != null) {
+    if (userBloc.state.loaded && _isSignUp && userBloc.state.user != null) {
       final currentState = navigatorKey.currentState;
       if (currentState == null) {
         return;
       }
 
+      // закрыть Sign Up
       currentState.pop();
+      // закрыть Sign In
       currentState.pop();
 
       close();
       return;
     }
 
-    emit(state.copyWith(loading: signUpLoading || userLoading, error: error));
+    emit(state.copyWith(
+      loading: signUpBloc.state.loading || userBloc.state.loading,
+      error: error,
+    ));
   }
 
   void _signUp(_SignUpEvent event, emit) {
-    authBloc.add(
-      AuthEvent.signUp(login: event.login, password: event.password),
+    signUpBloc.add(
+      SignUpEvent.signUp(login: event.login, password: event.password),
     );
   }
 
   void _clearError(_ClearErrorEvent event, emit) {
-    authBloc.add(const AuthEvent.clearSignUpError());
-    userBloc.add(const UserEvent.clearFetchUserError());
+    signUpBloc.add(const SignUpEvent.clearError());
+    userBloc.add(const UserGetInfoEvent.clearError());
   }
 }

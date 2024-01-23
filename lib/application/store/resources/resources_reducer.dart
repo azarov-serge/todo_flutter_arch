@@ -8,7 +8,7 @@ ResourcesState resourcesReducer(ResourcesState state, dynamic action) {
         ...state.resources,
         payload.resource.name: payload.resource
       }),
-      removeResource: (payload) {
+      deleteResource: (payload) {
         final resources = {...state.resources};
         resources.remove(payload.resourceName);
 

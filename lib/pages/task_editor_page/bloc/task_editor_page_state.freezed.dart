@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TaskEditorPageState {
   String get id => throw _privateConstructorUsedError;
+  bool get loaded => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
   TaskModel? get task => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
@@ -32,7 +33,8 @@ abstract class $TaskEditorPageStateCopyWith<$Res> {
           TaskEditorPageState value, $Res Function(TaskEditorPageState) then) =
       _$TaskEditorPageStateCopyWithImpl<$Res, TaskEditorPageState>;
   @useResult
-  $Res call({String id, bool loading, TaskModel? task, String error});
+  $Res call(
+      {String id, bool loaded, bool loading, TaskModel? task, String error});
 
   $TaskModelCopyWith<$Res>? get task;
 }
@@ -51,6 +53,7 @@ class _$TaskEditorPageStateCopyWithImpl<$Res, $Val extends TaskEditorPageState>
   @override
   $Res call({
     Object? id = null,
+    Object? loaded = null,
     Object? loading = null,
     Object? task = freezed,
     Object? error = null,
@@ -60,6 +63,10 @@ class _$TaskEditorPageStateCopyWithImpl<$Res, $Val extends TaskEditorPageState>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      loaded: null == loaded
+          ? _value.loaded
+          : loaded // ignore: cast_nullable_to_non_nullable
+              as bool,
       loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -96,7 +103,8 @@ abstract class _$$_TaskEditorPageStateCopyWith<$Res>
       __$$_TaskEditorPageStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, bool loading, TaskModel? task, String error});
+  $Res call(
+      {String id, bool loaded, bool loading, TaskModel? task, String error});
 
   @override
   $TaskModelCopyWith<$Res>? get task;
@@ -114,6 +122,7 @@ class __$$_TaskEditorPageStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? loaded = null,
     Object? loading = null,
     Object? task = freezed,
     Object? error = null,
@@ -123,6 +132,10 @@ class __$$_TaskEditorPageStateCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      loaded: null == loaded
+          ? _value.loaded
+          : loaded // ignore: cast_nullable_to_non_nullable
+              as bool,
       loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -143,11 +156,18 @@ class __$$_TaskEditorPageStateCopyWithImpl<$Res>
 
 class _$_TaskEditorPageState implements _TaskEditorPageState {
   const _$_TaskEditorPageState(
-      {this.id = '', this.loading = false, this.task, this.error = ''});
+      {this.id = '',
+      this.loaded = false,
+      this.loading = false,
+      this.task,
+      this.error = ''});
 
   @override
   @JsonKey()
   final String id;
+  @override
+  @JsonKey()
+  final bool loaded;
   @override
   @JsonKey()
   final bool loading;
@@ -159,7 +179,7 @@ class _$_TaskEditorPageState implements _TaskEditorPageState {
 
   @override
   String toString() {
-    return 'TaskEditorPageState(id: $id, loading: $loading, task: $task, error: $error)';
+    return 'TaskEditorPageState(id: $id, loaded: $loaded, loading: $loading, task: $task, error: $error)';
   }
 
   @override
@@ -168,13 +188,15 @@ class _$_TaskEditorPageState implements _TaskEditorPageState {
         (other.runtimeType == runtimeType &&
             other is _$_TaskEditorPageState &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.loaded, loaded) || other.loaded == loaded) &&
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.task, task) || other.task == task) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, loading, task, error);
+  int get hashCode =>
+      Object.hash(runtimeType, id, loaded, loading, task, error);
 
   @JsonKey(ignore: true)
   @override
@@ -187,12 +209,15 @@ class _$_TaskEditorPageState implements _TaskEditorPageState {
 abstract class _TaskEditorPageState implements TaskEditorPageState {
   const factory _TaskEditorPageState(
       {final String id,
+      final bool loaded,
       final bool loading,
       final TaskModel? task,
       final String error}) = _$_TaskEditorPageState;
 
   @override
   String get id;
+  @override
+  bool get loaded;
   @override
   bool get loading;
   @override

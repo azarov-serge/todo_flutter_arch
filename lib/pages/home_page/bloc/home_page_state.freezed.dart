@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomePageState {
   bool get loading => throw _privateConstructorUsedError;
-  bool get signOutLoading => throw _privateConstructorUsedError;
+  String get error => throw _privateConstructorUsedError;
   UserModel? get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +31,7 @@ abstract class $HomePageStateCopyWith<$Res> {
           HomePageState value, $Res Function(HomePageState) then) =
       _$HomePageStateCopyWithImpl<$Res, HomePageState>;
   @useResult
-  $Res call({bool loading, bool signOutLoading, UserModel? user});
+  $Res call({bool loading, String error, UserModel? user});
 
   $UserModelCopyWith<$Res>? get user;
 }
@@ -50,7 +50,7 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
   @override
   $Res call({
     Object? loading = null,
-    Object? signOutLoading = null,
+    Object? error = null,
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
@@ -58,10 +58,10 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
-      signOutLoading: null == signOutLoading
-          ? _value.signOutLoading
-          : signOutLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -90,7 +90,7 @@ abstract class _$$_HomePageStateCopyWith<$Res>
       __$$_HomePageStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool loading, bool signOutLoading, UserModel? user});
+  $Res call({bool loading, String error, UserModel? user});
 
   @override
   $UserModelCopyWith<$Res>? get user;
@@ -108,7 +108,7 @@ class __$$_HomePageStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? loading = null,
-    Object? signOutLoading = null,
+    Object? error = null,
     Object? user = freezed,
   }) {
     return _then(_$_HomePageState(
@@ -116,10 +116,10 @@ class __$$_HomePageStateCopyWithImpl<$Res>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
-      signOutLoading: null == signOutLoading
-          ? _value.signOutLoading
-          : signOutLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -131,21 +131,20 @@ class __$$_HomePageStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_HomePageState implements _HomePageState {
-  const _$_HomePageState(
-      {this.loading = true, this.signOutLoading = false, this.user});
+  const _$_HomePageState({this.loading = true, this.error = '', this.user});
 
   @override
   @JsonKey()
   final bool loading;
   @override
   @JsonKey()
-  final bool signOutLoading;
+  final String error;
   @override
   final UserModel? user;
 
   @override
   String toString() {
-    return 'HomePageState(loading: $loading, signOutLoading: $signOutLoading, user: $user)';
+    return 'HomePageState(loading: $loading, error: $error, user: $user)';
   }
 
   @override
@@ -154,13 +153,12 @@ class _$_HomePageState implements _HomePageState {
         (other.runtimeType == runtimeType &&
             other is _$_HomePageState &&
             (identical(other.loading, loading) || other.loading == loading) &&
-            (identical(other.signOutLoading, signOutLoading) ||
-                other.signOutLoading == signOutLoading) &&
+            (identical(other.error, error) || other.error == error) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, loading, signOutLoading, user);
+  int get hashCode => Object.hash(runtimeType, loading, error, user);
 
   @JsonKey(ignore: true)
   @override
@@ -172,13 +170,13 @@ class _$_HomePageState implements _HomePageState {
 abstract class _HomePageState implements HomePageState {
   const factory _HomePageState(
       {final bool loading,
-      final bool signOutLoading,
+      final String error,
       final UserModel? user}) = _$_HomePageState;
 
   @override
   bool get loading;
   @override
-  bool get signOutLoading;
+  String get error;
   @override
   UserModel? get user;
   @override

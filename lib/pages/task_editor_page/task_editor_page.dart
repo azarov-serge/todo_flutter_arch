@@ -20,6 +20,19 @@ class _TaskEditorPageState extends State<TaskEditorPage> {
       listener: (ctx, state) {
         final error = state.error;
 
+        if (state.loaded && error.isEmpty) {
+          _showAlert(
+            context,
+            message: 'Success',
+            onPressed: (context) {
+              // Закрыть модалку
+              Navigator.of(context).pop();
+              // Вернуться на главную
+              Navigator.of(context).pop();
+            },
+          );
+        }
+
         if (error.isNotEmpty) {
           _showAlert(
             context,
@@ -38,7 +51,11 @@ class _TaskEditorPageState extends State<TaskEditorPage> {
           final task = state.task;
 
           if (task == null) {
-            return const Scaffold(body: SizedBox.shrink());
+            return Scaffold(
+                appBar: AppBar(
+                  title: const Text('Task Editor'),
+                ),
+                body: const SizedBox.shrink());
           }
 
           final taskEditorPageBloc = context.read<TaskEditorPageBloc>();
@@ -64,7 +81,7 @@ class _TaskEditorPageState extends State<TaskEditorPage> {
                                 initialValue: task.name,
                                 onChanged: (text) {
                                   taskEditorPageBloc.add(
-                                    TaskEditorPageEvent.updateTask(
+                                    TaskEditorPageEvent.changeTask(
                                       task.copyWith(name: text),
                                     ),
                                   );
@@ -108,9 +125,14 @@ class _TaskEditorPageState extends State<TaskEditorPage> {
       builder: (ctx) => AlertDialog(
         content: Text(message),
         actions: [
-          ElevatedButton(
-            onPressed: () => onPressed(ctx),
-            child: const Text('Ok'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () => onPressed(ctx),
+                child: const Text('Ok'),
+              ),
+            ],
           ),
         ],
       ),
