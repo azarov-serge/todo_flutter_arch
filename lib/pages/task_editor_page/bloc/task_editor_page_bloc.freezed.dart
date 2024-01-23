@@ -20,7 +20,7 @@ mixin _$TaskEditorPageEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
     required TResult Function(String id) init,
-    required TResult Function(TaskModel task) updateTask,
+    required TResult Function(TaskModel task) changeTask,
     required TResult Function(TaskModel task) submit,
     required TResult Function() clearError,
   }) =>
@@ -29,7 +29,7 @@ mixin _$TaskEditorPageEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
     TResult? Function(String id)? init,
-    TResult? Function(TaskModel task)? updateTask,
+    TResult? Function(TaskModel task)? changeTask,
     TResult? Function(TaskModel task)? submit,
     TResult? Function()? clearError,
   }) =>
@@ -38,7 +38,7 @@ mixin _$TaskEditorPageEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
     TResult Function(String id)? init,
-    TResult Function(TaskModel task)? updateTask,
+    TResult Function(TaskModel task)? changeTask,
     TResult Function(TaskModel task)? submit,
     TResult Function()? clearError,
     required TResult orElse(),
@@ -48,7 +48,7 @@ mixin _$TaskEditorPageEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
     required TResult Function(_InitEvent value) init,
-    required TResult Function(_UpdateTaskEvent value) updateTask,
+    required TResult Function(_ChangeTaskEvent value) changeTask,
     required TResult Function(_SubmitEvent value) submit,
     required TResult Function(_ClearErrorEvent value) clearError,
   }) =>
@@ -57,7 +57,7 @@ mixin _$TaskEditorPageEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
     TResult? Function(_InitEvent value)? init,
-    TResult? Function(_UpdateTaskEvent value)? updateTask,
+    TResult? Function(_ChangeTaskEvent value)? changeTask,
     TResult? Function(_SubmitEvent value)? submit,
     TResult? Function(_ClearErrorEvent value)? clearError,
   }) =>
@@ -66,7 +66,7 @@ mixin _$TaskEditorPageEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
     TResult Function(_InitEvent value)? init,
-    TResult Function(_UpdateTaskEvent value)? updateTask,
+    TResult Function(_ChangeTaskEvent value)? changeTask,
     TResult Function(_SubmitEvent value)? submit,
     TResult Function(_ClearErrorEvent value)? clearError,
     required TResult orElse(),
@@ -169,7 +169,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
     required TResult Function(String id) init,
-    required TResult Function(TaskModel task) updateTask,
+    required TResult Function(TaskModel task) changeTask,
     required TResult Function(TaskModel task) submit,
     required TResult Function() clearError,
   }) {
@@ -181,7 +181,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
     TResult? Function(String id)? init,
-    TResult? Function(TaskModel task)? updateTask,
+    TResult? Function(TaskModel task)? changeTask,
     TResult? Function(TaskModel task)? submit,
     TResult? Function()? clearError,
   }) {
@@ -193,7 +193,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
     TResult Function(String id)? init,
-    TResult Function(TaskModel task)? updateTask,
+    TResult Function(TaskModel task)? changeTask,
     TResult Function(TaskModel task)? submit,
     TResult Function()? clearError,
     required TResult orElse(),
@@ -209,7 +209,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
     required TResult Function(_InitEvent value) init,
-    required TResult Function(_UpdateTaskEvent value) updateTask,
+    required TResult Function(_ChangeTaskEvent value) changeTask,
     required TResult Function(_SubmitEvent value) submit,
     required TResult Function(_ClearErrorEvent value) clearError,
   }) {
@@ -221,7 +221,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
     TResult? Function(_InitEvent value)? init,
-    TResult? Function(_UpdateTaskEvent value)? updateTask,
+    TResult? Function(_ChangeTaskEvent value)? changeTask,
     TResult? Function(_SubmitEvent value)? submit,
     TResult? Function(_ClearErrorEvent value)? clearError,
   }) {
@@ -233,7 +233,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
     TResult Function(_InitEvent value)? init,
-    TResult Function(_UpdateTaskEvent value)? updateTask,
+    TResult Function(_ChangeTaskEvent value)? changeTask,
     TResult Function(_SubmitEvent value)? submit,
     TResult Function(_ClearErrorEvent value)? clearError,
     required TResult orElse(),
@@ -321,7 +321,7 @@ class _$_InitEvent implements _InitEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
     required TResult Function(String id) init,
-    required TResult Function(TaskModel task) updateTask,
+    required TResult Function(TaskModel task) changeTask,
     required TResult Function(TaskModel task) submit,
     required TResult Function() clearError,
   }) {
@@ -333,7 +333,7 @@ class _$_InitEvent implements _InitEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
     TResult? Function(String id)? init,
-    TResult? Function(TaskModel task)? updateTask,
+    TResult? Function(TaskModel task)? changeTask,
     TResult? Function(TaskModel task)? submit,
     TResult? Function()? clearError,
   }) {
@@ -345,7 +345,7 @@ class _$_InitEvent implements _InitEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
     TResult Function(String id)? init,
-    TResult Function(TaskModel task)? updateTask,
+    TResult Function(TaskModel task)? changeTask,
     TResult Function(TaskModel task)? submit,
     TResult Function()? clearError,
     required TResult orElse(),
@@ -361,7 +361,7 @@ class _$_InitEvent implements _InitEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
     required TResult Function(_InitEvent value) init,
-    required TResult Function(_UpdateTaskEvent value) updateTask,
+    required TResult Function(_ChangeTaskEvent value) changeTask,
     required TResult Function(_SubmitEvent value) submit,
     required TResult Function(_ClearErrorEvent value) clearError,
   }) {
@@ -373,7 +373,7 @@ class _$_InitEvent implements _InitEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
     TResult? Function(_InitEvent value)? init,
-    TResult? Function(_UpdateTaskEvent value)? updateTask,
+    TResult? Function(_ChangeTaskEvent value)? changeTask,
     TResult? Function(_SubmitEvent value)? submit,
     TResult? Function(_ClearErrorEvent value)? clearError,
   }) {
@@ -385,7 +385,7 @@ class _$_InitEvent implements _InitEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
     TResult Function(_InitEvent value)? init,
-    TResult Function(_UpdateTaskEvent value)? updateTask,
+    TResult Function(_ChangeTaskEvent value)? changeTask,
     TResult Function(_SubmitEvent value)? submit,
     TResult Function(_ClearErrorEvent value)? clearError,
     required TResult orElse(),
@@ -407,10 +407,10 @@ abstract class _InitEvent implements TaskEditorPageEvent {
 }
 
 /// @nodoc
-abstract class _$$_UpdateTaskEventCopyWith<$Res> {
-  factory _$$_UpdateTaskEventCopyWith(
-          _$_UpdateTaskEvent value, $Res Function(_$_UpdateTaskEvent) then) =
-      __$$_UpdateTaskEventCopyWithImpl<$Res>;
+abstract class _$$_ChangeTaskEventCopyWith<$Res> {
+  factory _$$_ChangeTaskEventCopyWith(
+          _$_ChangeTaskEvent value, $Res Function(_$_ChangeTaskEvent) then) =
+      __$$_ChangeTaskEventCopyWithImpl<$Res>;
   @useResult
   $Res call({TaskModel task});
 
@@ -418,11 +418,11 @@ abstract class _$$_UpdateTaskEventCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdateTaskEventCopyWithImpl<$Res>
-    extends _$TaskEditorPageEventCopyWithImpl<$Res, _$_UpdateTaskEvent>
-    implements _$$_UpdateTaskEventCopyWith<$Res> {
-  __$$_UpdateTaskEventCopyWithImpl(
-      _$_UpdateTaskEvent _value, $Res Function(_$_UpdateTaskEvent) _then)
+class __$$_ChangeTaskEventCopyWithImpl<$Res>
+    extends _$TaskEditorPageEventCopyWithImpl<$Res, _$_ChangeTaskEvent>
+    implements _$$_ChangeTaskEventCopyWith<$Res> {
+  __$$_ChangeTaskEventCopyWithImpl(
+      _$_ChangeTaskEvent _value, $Res Function(_$_ChangeTaskEvent) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -430,7 +430,7 @@ class __$$_UpdateTaskEventCopyWithImpl<$Res>
   $Res call({
     Object? task = null,
   }) {
-    return _then(_$_UpdateTaskEvent(
+    return _then(_$_ChangeTaskEvent(
       null == task
           ? _value.task
           : task // ignore: cast_nullable_to_non_nullable
@@ -449,22 +449,22 @@ class __$$_UpdateTaskEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateTaskEvent implements _UpdateTaskEvent {
-  const _$_UpdateTaskEvent(this.task);
+class _$_ChangeTaskEvent implements _ChangeTaskEvent {
+  const _$_ChangeTaskEvent(this.task);
 
   @override
   final TaskModel task;
 
   @override
   String toString() {
-    return 'TaskEditorPageEvent.updateTask(task: $task)';
+    return 'TaskEditorPageEvent.changeTask(task: $task)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateTaskEvent &&
+            other is _$_ChangeTaskEvent &&
             (identical(other.task, task) || other.task == task));
   }
 
@@ -474,19 +474,19 @@ class _$_UpdateTaskEvent implements _UpdateTaskEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateTaskEventCopyWith<_$_UpdateTaskEvent> get copyWith =>
-      __$$_UpdateTaskEventCopyWithImpl<_$_UpdateTaskEvent>(this, _$identity);
+  _$$_ChangeTaskEventCopyWith<_$_ChangeTaskEvent> get copyWith =>
+      __$$_ChangeTaskEventCopyWithImpl<_$_ChangeTaskEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
     required TResult Function(String id) init,
-    required TResult Function(TaskModel task) updateTask,
+    required TResult Function(TaskModel task) changeTask,
     required TResult Function(TaskModel task) submit,
     required TResult Function() clearError,
   }) {
-    return updateTask(task);
+    return changeTask(task);
   }
 
   @override
@@ -494,11 +494,11 @@ class _$_UpdateTaskEvent implements _UpdateTaskEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
     TResult? Function(String id)? init,
-    TResult? Function(TaskModel task)? updateTask,
+    TResult? Function(TaskModel task)? changeTask,
     TResult? Function(TaskModel task)? submit,
     TResult? Function()? clearError,
   }) {
-    return updateTask?.call(task);
+    return changeTask?.call(task);
   }
 
   @override
@@ -506,13 +506,13 @@ class _$_UpdateTaskEvent implements _UpdateTaskEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
     TResult Function(String id)? init,
-    TResult Function(TaskModel task)? updateTask,
+    TResult Function(TaskModel task)? changeTask,
     TResult Function(TaskModel task)? submit,
     TResult Function()? clearError,
     required TResult orElse(),
   }) {
-    if (updateTask != null) {
-      return updateTask(task);
+    if (changeTask != null) {
+      return changeTask(task);
     }
     return orElse();
   }
@@ -522,11 +522,11 @@ class _$_UpdateTaskEvent implements _UpdateTaskEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
     required TResult Function(_InitEvent value) init,
-    required TResult Function(_UpdateTaskEvent value) updateTask,
+    required TResult Function(_ChangeTaskEvent value) changeTask,
     required TResult Function(_SubmitEvent value) submit,
     required TResult Function(_ClearErrorEvent value) clearError,
   }) {
-    return updateTask(this);
+    return changeTask(this);
   }
 
   @override
@@ -534,11 +534,11 @@ class _$_UpdateTaskEvent implements _UpdateTaskEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
     TResult? Function(_InitEvent value)? init,
-    TResult? Function(_UpdateTaskEvent value)? updateTask,
+    TResult? Function(_ChangeTaskEvent value)? changeTask,
     TResult? Function(_SubmitEvent value)? submit,
     TResult? Function(_ClearErrorEvent value)? clearError,
   }) {
-    return updateTask?.call(this);
+    return changeTask?.call(this);
   }
 
   @override
@@ -546,24 +546,24 @@ class _$_UpdateTaskEvent implements _UpdateTaskEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
     TResult Function(_InitEvent value)? init,
-    TResult Function(_UpdateTaskEvent value)? updateTask,
+    TResult Function(_ChangeTaskEvent value)? changeTask,
     TResult Function(_SubmitEvent value)? submit,
     TResult Function(_ClearErrorEvent value)? clearError,
     required TResult orElse(),
   }) {
-    if (updateTask != null) {
-      return updateTask(this);
+    if (changeTask != null) {
+      return changeTask(this);
     }
     return orElse();
   }
 }
 
-abstract class _UpdateTaskEvent implements TaskEditorPageEvent {
-  const factory _UpdateTaskEvent(final TaskModel task) = _$_UpdateTaskEvent;
+abstract class _ChangeTaskEvent implements TaskEditorPageEvent {
+  const factory _ChangeTaskEvent(final TaskModel task) = _$_ChangeTaskEvent;
 
   TaskModel get task;
   @JsonKey(ignore: true)
-  _$$_UpdateTaskEventCopyWith<_$_UpdateTaskEvent> get copyWith =>
+  _$$_ChangeTaskEventCopyWith<_$_ChangeTaskEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -643,7 +643,7 @@ class _$_SubmitEvent implements _SubmitEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
     required TResult Function(String id) init,
-    required TResult Function(TaskModel task) updateTask,
+    required TResult Function(TaskModel task) changeTask,
     required TResult Function(TaskModel task) submit,
     required TResult Function() clearError,
   }) {
@@ -655,7 +655,7 @@ class _$_SubmitEvent implements _SubmitEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
     TResult? Function(String id)? init,
-    TResult? Function(TaskModel task)? updateTask,
+    TResult? Function(TaskModel task)? changeTask,
     TResult? Function(TaskModel task)? submit,
     TResult? Function()? clearError,
   }) {
@@ -667,7 +667,7 @@ class _$_SubmitEvent implements _SubmitEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
     TResult Function(String id)? init,
-    TResult Function(TaskModel task)? updateTask,
+    TResult Function(TaskModel task)? changeTask,
     TResult Function(TaskModel task)? submit,
     TResult Function()? clearError,
     required TResult orElse(),
@@ -683,7 +683,7 @@ class _$_SubmitEvent implements _SubmitEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
     required TResult Function(_InitEvent value) init,
-    required TResult Function(_UpdateTaskEvent value) updateTask,
+    required TResult Function(_ChangeTaskEvent value) changeTask,
     required TResult Function(_SubmitEvent value) submit,
     required TResult Function(_ClearErrorEvent value) clearError,
   }) {
@@ -695,7 +695,7 @@ class _$_SubmitEvent implements _SubmitEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
     TResult? Function(_InitEvent value)? init,
-    TResult? Function(_UpdateTaskEvent value)? updateTask,
+    TResult? Function(_ChangeTaskEvent value)? changeTask,
     TResult? Function(_SubmitEvent value)? submit,
     TResult? Function(_ClearErrorEvent value)? clearError,
   }) {
@@ -707,7 +707,7 @@ class _$_SubmitEvent implements _SubmitEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
     TResult Function(_InitEvent value)? init,
-    TResult Function(_UpdateTaskEvent value)? updateTask,
+    TResult Function(_ChangeTaskEvent value)? changeTask,
     TResult Function(_SubmitEvent value)? submit,
     TResult Function(_ClearErrorEvent value)? clearError,
     required TResult orElse(),
@@ -768,7 +768,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
     required TResult Function(String id) init,
-    required TResult Function(TaskModel task) updateTask,
+    required TResult Function(TaskModel task) changeTask,
     required TResult Function(TaskModel task) submit,
     required TResult Function() clearError,
   }) {
@@ -780,7 +780,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
     TResult? Function(String id)? init,
-    TResult? Function(TaskModel task)? updateTask,
+    TResult? Function(TaskModel task)? changeTask,
     TResult? Function(TaskModel task)? submit,
     TResult? Function()? clearError,
   }) {
@@ -792,7 +792,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
     TResult Function(String id)? init,
-    TResult Function(TaskModel task)? updateTask,
+    TResult Function(TaskModel task)? changeTask,
     TResult Function(TaskModel task)? submit,
     TResult Function()? clearError,
     required TResult orElse(),
@@ -808,7 +808,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
     required TResult Function(_InitEvent value) init,
-    required TResult Function(_UpdateTaskEvent value) updateTask,
+    required TResult Function(_ChangeTaskEvent value) changeTask,
     required TResult Function(_SubmitEvent value) submit,
     required TResult Function(_ClearErrorEvent value) clearError,
   }) {
@@ -820,7 +820,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
     TResult? Function(_InitEvent value)? init,
-    TResult? Function(_UpdateTaskEvent value)? updateTask,
+    TResult? Function(_ChangeTaskEvent value)? changeTask,
     TResult? Function(_SubmitEvent value)? submit,
     TResult? Function(_ClearErrorEvent value)? clearError,
   }) {
@@ -832,7 +832,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
     TResult Function(_InitEvent value)? init,
-    TResult Function(_UpdateTaskEvent value)? updateTask,
+    TResult Function(_ChangeTaskEvent value)? changeTask,
     TResult Function(_SubmitEvent value)? submit,
     TResult Function(_ClearErrorEvent value)? clearError,
     required TResult orElse(),

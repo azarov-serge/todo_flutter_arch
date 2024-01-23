@@ -5,5 +5,5 @@ part 'application_state.freezed.dart';
 
 @freezed
 class ApplicationState with _$ApplicationState {
-  const factory ApplicationState({@Default(false) inited}) = _ApplicationState;
+  const factory ApplicationState() = _ApplicationState;
 }

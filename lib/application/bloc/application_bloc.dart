@@ -8,9 +8,10 @@ import 'package:bloc/bloc.dart';
 
 import 'package:todo/application/router/router.dart';
 import 'package:todo/application/store/app_state.dart';
-import 'package:todo/models/models.dart';
-import 'package:todo/shared/blocs/auth/auth_bloc.dart';
-import 'package:todo/shared/blocs/user/user_block.dart';
+
+import 'package:todo/shared/blocs/auth/auth.dart';
+import 'package:todo/shared/blocs/user/user.dart';
+
 import 'package:todo/shared/constants/global.dart';
 import 'package:todo/shared/di/di.dart';
 
@@ -21,16 +22,20 @@ part 'application_bloc.freezed.dart';
 
 class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   final Store<AppState> store;
-  final AuthBloc authBloc = getIt();
-  final UserBloc userBloc = getIt();
+  final CheckAuthBloc authBloc;
+
+  final UserGetInfoBloc userBloc = getIt();
+  final SignOutBloc signOutBloc = getIt();
+
+  bool _inited = false;
 
   late final StreamSubscription<AppState> _storeListener;
 
-  factory ApplicationBloc.create() => ApplicationBloc(
-        store: getIt.get(),
-      );
+  factory ApplicationBloc.create({required CheckAuthBloc authBloc}) =>
+      ApplicationBloc(store: getIt.get(), authBloc: authBloc);
 
-  ApplicationBloc({required this.store}) : super(const ApplicationState()) {
+  ApplicationBloc({required this.store, required this.authBloc})
+      : super(const ApplicationState()) {
     on<_ChangeStateEvent>(_changeState);
     on<_InitEvent>(_init);
     on<_ClearDataEvent>(_clearData);
@@ -48,56 +53,50 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
 
   void _changeState(_ChangeStateEvent event, emit) {
     // Проверяем, авторизован пользователь или нет
-    final checkAuthResource = authBloc.state.checkAuthResource;
-    final userResource = userBloc.state.fetchUserResource;
-    final UserModel? user = userResource.data;
+    final authState = authBloc.state;
 
-    final checkAuthLoaded = checkAuthResource.loaded;
-    String? userId = checkAuthResource.data;
+    final userId = authState.userId;
 
     // Если не авторизован, отправить на форму авторизации
-    if (checkAuthLoaded == true &&
-        userId == null &&
-        state.inited == false &&
-        // Хз как проверить. что текущий поуть не signInRoute, поэтому такой костыль
-        // Иначе 2 раза рендерится SignInPage
-        authBloc.signInMode == false) {
-      emit(state.copyWith(inited: true));
+    if (authBloc.state.loaded == true && userId.isEmpty && _inited == false
+        // Хз как проверить. что текущий поуть не signInRoute
+        // 2 раза рендерится SignInPage
+        ) {
+      _inited = true;
 
-      authBloc.signInMode = true;
       navigatorKey.currentState?.pushNamed(signInRoute);
       return;
     }
 
     // Если авторизация прошла успешна, загружаем инфу по пользователю (или другие данные на старте проекта)
-    if (checkAuthLoaded == true &&
-        userId != null &&
-        state.inited == false &&
-        user == null) {
-      emit(state.copyWith(inited: true));
+    if (authState.loaded == true &&
+        userId.isNotEmpty &&
+        _inited == false &&
+        userBloc.state.user == null) {
+      _inited = true;
 
-      userBloc.add(UserEvent.fetchUser(userId));
+      userBloc.add(UserGetInfoEvent.fetchUser(userId));
 
       return;
     }
 
-    final signOutResource = authBloc.state.signOutResource;
-    final signOutLoaded = signOutResource.loaded;
-
     // Если произошел выход, очистить состояния
-    if (signOutLoaded == true) {
+    if (signOutBloc.state.loaded == true && signOutBloc.state.error.isEmpty) {
+      navigatorKey.currentState?.pushNamed(signInRoute);
+
       add(const ApplicationEvent.clearData());
       return;
     }
   }
 
   void _init(_InitEvent event, emit) {
-    authBloc.add(const AuthEvent.checkAuth());
+    authBloc.add(const CheckAuthEvent.check());
   }
 
   void _clearData(_ClearDataEvent event, emit) {
-    authBloc.add(const AuthEvent.clear());
-    userBloc.add(const UserEvent.clear());
-    emit(state.copyWith(inited: false));
+    authBloc.add(const CheckAuthEvent.clear());
+    signOutBloc.add(const SignOutEvent.clear());
+    userBloc.add(const UserGetInfoEvent.clear());
+    _inited = false;
   }
 }

@@ -10,9 +10,9 @@ import 'package:bloc/bloc.dart';
 import 'package:todo/application/store/app_state.dart';
 import 'package:todo/application/store/resources/resources.dart';
 import 'package:todo/models/models.dart';
-import 'package:todo/shared/blocs/auth/auth_bloc.dart';
-import 'package:todo/shared/blocs/task/task_bloc.dart';
-import 'package:todo/shared/blocs/user/user_block.dart';
+import 'package:todo/shared/blocs/task/task.dart';
+import 'package:todo/shared/blocs/user/user.dart';
+
 import 'package:todo/shared/constants/global.dart';
 import 'package:todo/shared/di/di.dart';
 import 'package:todo/shared/services/services.dart';
@@ -25,21 +25,33 @@ part 'task_editor_page_bloc.freezed.dart';
 class TaskEditorPageBloc
     extends Bloc<TaskEditorPageEvent, TaskEditorPageState> {
   final Store<AppState> store;
-  final TaskBloc taskBloc = getIt();
-  final UserBloc userBloc = getIt();
+
+  final TaskCreateBloc taskCreateBloc;
+  final TaskUpdateBloc taskUpdateBloc;
+  final UserGetInfoBloc userBloc = getIt();
+  final TaskGetListBloc tasksBloc = getIt();
 
   late final StreamSubscription<AppState> _storeListener;
 
-  factory TaskEditorPageBloc.create() => TaskEditorPageBloc(
+  factory TaskEditorPageBloc.create({
+    required TaskCreateBloc taskCreateBloc,
+    required TaskUpdateBloc taskUpdateBloc,
+  }) =>
+      TaskEditorPageBloc(
         store: getIt.get(),
+        taskCreateBloc: taskCreateBloc,
+        taskUpdateBloc: taskUpdateBloc,
       );
 
-  TaskEditorPageBloc({required this.store})
-      : super(const TaskEditorPageState()) {
+  TaskEditorPageBloc({
+    required this.store,
+    required this.taskCreateBloc,
+    required this.taskUpdateBloc,
+  }) : super(const TaskEditorPageState()) {
     on<_ChangeStateEvent>(_changeState);
 
     on<_InitEvent>(_init);
-    on<_UpdateTaskEvent>(_updateTask);
+    on<_ChangeTaskEvent>(_changeTask);
     on<_SubmitEvent>(_submit);
 
     on<_ClearErrorEvent>(_clearError);
@@ -82,27 +94,19 @@ class TaskEditorPageBloc
     final error = resource?.error ?? '';
     task = resource?.data ?? task;
 
-    if (!loading && loaded && error.isEmpty) {
-      emit(state.copyWith(task: null));
-      // Удаляем ресурс что бы не попасть в бесконечный цикл + не хранить ненужную инфу
-      taskBloc.add(TaskEvent.removeResource(request.resourceName));
-
-      // Можно обновлять кэш
-      taskBloc.add(TaskEvent.fetchList(user.id));
-
-      navigatorKey.currentState?.pop();
-
-      return;
-    }
-
     emit(
-      state.copyWith(task: task ?? state.task, loading: loading, error: error),
+      state.copyWith(
+        task: task ?? state.task,
+        loaded: loaded,
+        loading: loading,
+        error: error,
+      ),
     );
   }
 
   void _init(_InitEvent event, emit) {
     final id = event.id.isEmpty ? UniqueKey().toString() : event.id;
-    final List<TaskModel> tasks = taskBloc.state.getListResource.data ?? [];
+    final List<TaskModel> tasks = tasksBloc.state.tasks;
     TaskModel task = TaskModel.createEmpty();
 
     var request = taskCreateRequest.copyWith(id: id);
@@ -122,7 +126,7 @@ class TaskEditorPageBloc
     emit(state.copyWith(task: task, loading: loading, error: error, id: id));
   }
 
-  void _updateTask(_UpdateTaskEvent event, emit) {
+  void _changeTask(_ChangeTaskEvent event, emit) {
     emit(state.copyWith(task: event.task));
   }
 
@@ -130,10 +134,12 @@ class TaskEditorPageBloc
     final task = event.task;
 
     if (task.id.isEmpty) {
-      taskBloc.add(TaskEvent.createItem(task, state.id));
-    } else {
-      taskBloc.add(TaskEvent.updateItem(task));
+      taskCreateBloc.add(TaskCreateEvent.create(task, state.id));
+
+      return;
     }
+
+    taskUpdateBloc.add(TaskUpdateEvent.update(task));
   }
 
   void _clearError(_ClearErrorEvent event, emit) {
@@ -143,10 +149,12 @@ class TaskEditorPageBloc
       return;
     }
 
-    final request = task.id.isEmpty
-        ? taskCreateRequest.copyWith(id: state.id)
-        : taskUpdateRequest.copyWith(id: task.id);
+    if (task.id.isEmpty) {
+      taskCreateBloc.add(const TaskCreateEvent.clearError());
 
-    taskBloc.add(TaskEvent.clearResourceError(request));
+      return;
+    }
+
+    taskCreateBloc.add(const TaskCreateEvent.clearError());
   }
 }

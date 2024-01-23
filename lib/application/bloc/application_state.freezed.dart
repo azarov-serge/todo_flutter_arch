@@ -15,21 +15,13 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ApplicationState {
-  dynamic get inited => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ApplicationStateCopyWith<ApplicationState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+mixin _$ApplicationState {}
 
 /// @nodoc
 abstract class $ApplicationStateCopyWith<$Res> {
   factory $ApplicationStateCopyWith(
           ApplicationState value, $Res Function(ApplicationState) then) =
       _$ApplicationStateCopyWithImpl<$Res, ApplicationState>;
-  @useResult
-  $Res call({dynamic inited});
 }
 
 /// @nodoc
@@ -41,30 +33,13 @@ class _$ApplicationStateCopyWithImpl<$Res, $Val extends ApplicationState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? inited = null,
-  }) {
-    return _then(_value.copyWith(
-      inited: null == inited
-          ? _value.inited
-          : inited // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_ApplicationStateCopyWith<$Res>
-    implements $ApplicationStateCopyWith<$Res> {
+abstract class _$$_ApplicationStateCopyWith<$Res> {
   factory _$$_ApplicationStateCopyWith(
           _$_ApplicationState value, $Res Function(_$_ApplicationState) then) =
       __$$_ApplicationStateCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({dynamic inited});
 }
 
 /// @nodoc
@@ -74,58 +49,28 @@ class __$$_ApplicationStateCopyWithImpl<$Res>
   __$$_ApplicationStateCopyWithImpl(
       _$_ApplicationState _value, $Res Function(_$_ApplicationState) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? inited = null,
-  }) {
-    return _then(_$_ApplicationState(
-      inited: null == inited ? _value.inited : inited,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_ApplicationState implements _ApplicationState {
-  const _$_ApplicationState({this.inited = false});
-
-  @override
-  @JsonKey()
-  final dynamic inited;
+  const _$_ApplicationState();
 
   @override
   String toString() {
-    return 'ApplicationState(inited: $inited)';
+    return 'ApplicationState()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ApplicationState &&
-            const DeepCollectionEquality().equals(other.inited, inited));
+        (other.runtimeType == runtimeType && other is _$_ApplicationState);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(inited));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ApplicationStateCopyWith<_$_ApplicationState> get copyWith =>
-      __$$_ApplicationStateCopyWithImpl<_$_ApplicationState>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 }
 
 abstract class _ApplicationState implements ApplicationState {
-  const factory _ApplicationState({final dynamic inited}) = _$_ApplicationState;
-
-  @override
-  dynamic get inited;
-  @override
-  @JsonKey(ignore: true)
-  _$$_ApplicationStateCopyWith<_$_ApplicationState> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _ApplicationState() = _$_ApplicationState;
 }

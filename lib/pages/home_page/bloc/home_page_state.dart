@@ -8,7 +8,7 @@ part 'home_page_state.freezed.dart';
 class HomePageState with _$HomePageState {
   const factory HomePageState({
     @Default(true) bool loading,
-    @Default(false) bool signOutLoading,
+    @Default('') String error,
     UserModel? user,
   }) = _HomePageState;
 }

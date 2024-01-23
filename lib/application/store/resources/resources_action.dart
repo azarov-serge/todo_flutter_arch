@@ -11,9 +11,9 @@ class ResourcesAction with _$ResourcesAction {
     required ResourceModel resource,
   }) = _UpdateResource;
 
-  const factory ResourcesAction.removeResource({
+  const factory ResourcesAction.deleteResource({
     required String resourceName,
-  }) = _RemoveResource;
+  }) = _DeleteResource;
 
   const factory ResourcesAction.clear() = _Clear;
 }

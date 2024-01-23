@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/shared/blocs/auth/auth_bloc.dart';
+import 'package:todo/shared/blocs/auth/check_auth/check_auth_bloc.dart';
 
 import 'package:todo/shared/constants/global.dart';
 import 'package:todo/shared/di/di.dart';
@@ -18,11 +18,10 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ApplicationBloc>.value(
-          value: getIt<ApplicationBloc>()..add(const ApplicationEvent.init()),
-        ),
-        BlocProvider<AuthBloc>.value(
-          value: getIt<AuthBloc>(),
+        BlocProvider<ApplicationBloc>(
+          create: (BuildContext context) => ApplicationBloc.create(
+            authBloc: CheckAuthBloc.create(),
+          )..add(const ApplicationEvent.init()),
         ),
       ],
       child: BlocBuilder<ApplicationBloc, ApplicationState>(

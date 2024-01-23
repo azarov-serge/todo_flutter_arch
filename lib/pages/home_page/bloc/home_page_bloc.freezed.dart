@@ -20,6 +20,7 @@ mixin _$HomePageEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
     required TResult Function() loadInitialData,
+    required TResult Function() clearError,
     required TResult Function() signOut,
   }) =>
       throw _privateConstructorUsedError;
@@ -27,6 +28,7 @@ mixin _$HomePageEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
     TResult? Function()? loadInitialData,
+    TResult? Function()? clearError,
     TResult? Function()? signOut,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,6 +36,7 @@ mixin _$HomePageEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
     TResult Function()? loadInitialData,
+    TResult Function()? clearError,
     TResult Function()? signOut,
     required TResult orElse(),
   }) =>
@@ -42,6 +45,7 @@ mixin _$HomePageEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
     required TResult Function(_LoadInitialDataEvent value) loadInitialData,
+    required TResult Function(_ClearErrorEvent value) clearError,
     required TResult Function(_SignOutEvent value) signOut,
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +53,7 @@ mixin _$HomePageEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
     TResult? Function(_LoadInitialDataEvent value)? loadInitialData,
+    TResult? Function(_ClearErrorEvent value)? clearError,
     TResult? Function(_SignOutEvent value)? signOut,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +61,7 @@ mixin _$HomePageEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
     TResult Function(_LoadInitialDataEvent value)? loadInitialData,
+    TResult Function(_ClearErrorEvent value)? clearError,
     TResult Function(_SignOutEvent value)? signOut,
     required TResult orElse(),
   }) =>
@@ -157,6 +163,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
     required TResult Function() loadInitialData,
+    required TResult Function() clearError,
     required TResult Function() signOut,
   }) {
     return changeState(appState);
@@ -167,6 +174,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
     TResult? Function()? loadInitialData,
+    TResult? Function()? clearError,
     TResult? Function()? signOut,
   }) {
     return changeState?.call(appState);
@@ -177,6 +185,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
     TResult Function()? loadInitialData,
+    TResult Function()? clearError,
     TResult Function()? signOut,
     required TResult orElse(),
   }) {
@@ -191,6 +200,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
     required TResult Function(_LoadInitialDataEvent value) loadInitialData,
+    required TResult Function(_ClearErrorEvent value) clearError,
     required TResult Function(_SignOutEvent value) signOut,
   }) {
     return changeState(this);
@@ -201,6 +211,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
     TResult? Function(_LoadInitialDataEvent value)? loadInitialData,
+    TResult? Function(_ClearErrorEvent value)? clearError,
     TResult? Function(_SignOutEvent value)? signOut,
   }) {
     return changeState?.call(this);
@@ -211,6 +222,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
     TResult Function(_LoadInitialDataEvent value)? loadInitialData,
+    TResult Function(_ClearErrorEvent value)? clearError,
     TResult Function(_SignOutEvent value)? signOut,
     required TResult orElse(),
   }) {
@@ -271,6 +283,7 @@ class _$_LoadInitialDataEvent implements _LoadInitialDataEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
     required TResult Function() loadInitialData,
+    required TResult Function() clearError,
     required TResult Function() signOut,
   }) {
     return loadInitialData();
@@ -281,6 +294,7 @@ class _$_LoadInitialDataEvent implements _LoadInitialDataEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
     TResult? Function()? loadInitialData,
+    TResult? Function()? clearError,
     TResult? Function()? signOut,
   }) {
     return loadInitialData?.call();
@@ -291,6 +305,7 @@ class _$_LoadInitialDataEvent implements _LoadInitialDataEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
     TResult Function()? loadInitialData,
+    TResult Function()? clearError,
     TResult Function()? signOut,
     required TResult orElse(),
   }) {
@@ -305,6 +320,7 @@ class _$_LoadInitialDataEvent implements _LoadInitialDataEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
     required TResult Function(_LoadInitialDataEvent value) loadInitialData,
+    required TResult Function(_ClearErrorEvent value) clearError,
     required TResult Function(_SignOutEvent value) signOut,
   }) {
     return loadInitialData(this);
@@ -315,6 +331,7 @@ class _$_LoadInitialDataEvent implements _LoadInitialDataEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
     TResult? Function(_LoadInitialDataEvent value)? loadInitialData,
+    TResult? Function(_ClearErrorEvent value)? clearError,
     TResult? Function(_SignOutEvent value)? signOut,
   }) {
     return loadInitialData?.call(this);
@@ -325,6 +342,7 @@ class _$_LoadInitialDataEvent implements _LoadInitialDataEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
     TResult Function(_LoadInitialDataEvent value)? loadInitialData,
+    TResult Function(_ClearErrorEvent value)? clearError,
     TResult Function(_SignOutEvent value)? signOut,
     required TResult orElse(),
   }) {
@@ -337,6 +355,120 @@ class _$_LoadInitialDataEvent implements _LoadInitialDataEvent {
 
 abstract class _LoadInitialDataEvent implements HomePageEvent {
   const factory _LoadInitialDataEvent() = _$_LoadInitialDataEvent;
+}
+
+/// @nodoc
+abstract class _$$_ClearErrorEventCopyWith<$Res> {
+  factory _$$_ClearErrorEventCopyWith(
+          _$_ClearErrorEvent value, $Res Function(_$_ClearErrorEvent) then) =
+      __$$_ClearErrorEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ClearErrorEventCopyWithImpl<$Res>
+    extends _$HomePageEventCopyWithImpl<$Res, _$_ClearErrorEvent>
+    implements _$$_ClearErrorEventCopyWith<$Res> {
+  __$$_ClearErrorEventCopyWithImpl(
+      _$_ClearErrorEvent _value, $Res Function(_$_ClearErrorEvent) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ClearErrorEvent implements _ClearErrorEvent {
+  const _$_ClearErrorEvent();
+
+  @override
+  String toString() {
+    return 'HomePageEvent.clearError()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ClearErrorEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(AppState appState) changeState,
+    required TResult Function() loadInitialData,
+    required TResult Function() clearError,
+    required TResult Function() signOut,
+  }) {
+    return clearError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(AppState appState)? changeState,
+    TResult? Function()? loadInitialData,
+    TResult? Function()? clearError,
+    TResult? Function()? signOut,
+  }) {
+    return clearError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(AppState appState)? changeState,
+    TResult Function()? loadInitialData,
+    TResult Function()? clearError,
+    TResult Function()? signOut,
+    required TResult orElse(),
+  }) {
+    if (clearError != null) {
+      return clearError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ChangeStateEvent value) changeState,
+    required TResult Function(_LoadInitialDataEvent value) loadInitialData,
+    required TResult Function(_ClearErrorEvent value) clearError,
+    required TResult Function(_SignOutEvent value) signOut,
+  }) {
+    return clearError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ChangeStateEvent value)? changeState,
+    TResult? Function(_LoadInitialDataEvent value)? loadInitialData,
+    TResult? Function(_ClearErrorEvent value)? clearError,
+    TResult? Function(_SignOutEvent value)? signOut,
+  }) {
+    return clearError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ChangeStateEvent value)? changeState,
+    TResult Function(_LoadInitialDataEvent value)? loadInitialData,
+    TResult Function(_ClearErrorEvent value)? clearError,
+    TResult Function(_SignOutEvent value)? signOut,
+    required TResult orElse(),
+  }) {
+    if (clearError != null) {
+      return clearError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearErrorEvent implements HomePageEvent {
+  const factory _ClearErrorEvent() = _$_ClearErrorEvent;
 }
 
 /// @nodoc
@@ -379,6 +511,7 @@ class _$_SignOutEvent implements _SignOutEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
     required TResult Function() loadInitialData,
+    required TResult Function() clearError,
     required TResult Function() signOut,
   }) {
     return signOut();
@@ -389,6 +522,7 @@ class _$_SignOutEvent implements _SignOutEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
     TResult? Function()? loadInitialData,
+    TResult? Function()? clearError,
     TResult? Function()? signOut,
   }) {
     return signOut?.call();
@@ -399,6 +533,7 @@ class _$_SignOutEvent implements _SignOutEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
     TResult Function()? loadInitialData,
+    TResult Function()? clearError,
     TResult Function()? signOut,
     required TResult orElse(),
   }) {
@@ -413,6 +548,7 @@ class _$_SignOutEvent implements _SignOutEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
     required TResult Function(_LoadInitialDataEvent value) loadInitialData,
+    required TResult Function(_ClearErrorEvent value) clearError,
     required TResult Function(_SignOutEvent value) signOut,
   }) {
     return signOut(this);
@@ -423,6 +559,7 @@ class _$_SignOutEvent implements _SignOutEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
     TResult? Function(_LoadInitialDataEvent value)? loadInitialData,
+    TResult? Function(_ClearErrorEvent value)? clearError,
     TResult? Function(_SignOutEvent value)? signOut,
   }) {
     return signOut?.call(this);
@@ -433,6 +570,7 @@ class _$_SignOutEvent implements _SignOutEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
     TResult Function(_LoadInitialDataEvent value)? loadInitialData,
+    TResult Function(_ClearErrorEvent value)? clearError,
     TResult Function(_SignOutEvent value)? signOut,
     required TResult orElse(),
   }) {

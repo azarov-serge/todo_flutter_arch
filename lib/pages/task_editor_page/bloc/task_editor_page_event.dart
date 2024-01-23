@@ -8,8 +8,8 @@ class TaskEditorPageEvent with _$TaskEditorPageEvent {
 
   const factory TaskEditorPageEvent.init(String id) = _InitEvent;
 
-  const factory TaskEditorPageEvent.updateTask(TaskModel task) =
-      _UpdateTaskEvent;
+  const factory TaskEditorPageEvent.changeTask(TaskModel task) =
+      _ChangeTaskEvent;
 
   const factory TaskEditorPageEvent.submit(TaskModel task) = _SubmitEvent;
 

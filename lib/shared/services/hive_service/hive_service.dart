@@ -44,14 +44,14 @@ class HiveService implements FetchService {
     switch (authMethod) {
       case 'signIn':
         return await _authService.signIn(
-          login: data.login,
-          password: data.password,
+          login: data['login'],
+          password: data['password'],
         );
 
       case 'signUp':
         return await _authService.signUp(
-          login: data.login,
-          password: data.password,
+          login: data['login'],
+          password: data['password'],
         );
 
       case 'signOut':
@@ -98,7 +98,7 @@ class HiveService implements FetchService {
       case 'PATCH':
         return await _taskService.update(data);
       case 'DELETE':
-        return await _taskService.update(data);
+        return await _taskService.delete(data);
 
       default:
         throw Exception('Unknown request ${args.url}');
