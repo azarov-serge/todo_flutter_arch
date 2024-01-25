@@ -8,7 +8,7 @@ part of 'resource_model.dart';
 
 _$_ResourceModel _$$_ResourceModelFromJson(Map<String, dynamic> json) =>
     _$_ResourceModel(
-      name: json['name'] as String,
+      id: json['id'] as String,
       loading: json['loading'] as bool? ?? false,
       loaded: json['loaded'] as bool? ?? false,
       data: json['data'],
@@ -17,7 +17,7 @@ _$_ResourceModel _$$_ResourceModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_ResourceModelToJson(_$_ResourceModel instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'id': instance.id,
       'loading': instance.loading,
       'loaded': instance.loaded,
       'data': instance.data,

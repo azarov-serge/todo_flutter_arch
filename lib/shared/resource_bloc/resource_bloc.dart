@@ -9,45 +9,49 @@ import 'package:todo/application/store/app_state.dart';
 import 'package:todo/application/store/resources/resources.dart';
 
 import 'package:todo/shared/di/di.dart';
+import 'package:todo/shared/resource_bloc/model/resource_bloc_params.dart';
+
 import 'package:todo/shared/services/models/models.dart';
-import 'package:todo/shared/services/requests.dart';
 
-import 'user_get_info_state.dart';
+import 'resource_state.dart';
 
-part 'user_get_info_block.freezed.dart';
-part 'user_get_info_event.dart';
+part 'resource_bloc.freezed.dart';
+part 'resource_event.dart';
 
-class UserGetInfoBloc extends Bloc<UserGetInfoEvent, UserGetInfoState> {
+class ResourceBloc extends Bloc<ResourceEvent, ResourceState> {
   final Store<AppState> store;
+  final ResourceParamsModel params;
   late final StreamSubscription<AppState> _storeListener;
 
-  factory UserGetInfoBloc.create() => UserGetInfoBloc(
+  factory ResourceBloc.create({required ResourceParamsModel params}) =>
+      ResourceBloc(
         store: getIt.get(),
+        params: params,
       );
 
-  UserGetInfoBloc({required this.store}) : super(const UserGetInfoState()) {
+  ResourceBloc({required this.store, required this.params})
+      : super(const ResourceState()) {
     on<_ChangeStateEvent>(_changeState);
 
-    on<_FetchUserEvent>(_fetchUser);
+    on<_FetchDataEvent>(_fetch);
     on<_ClearErrorEvent>(_clearError);
-
     on<_DeleteResourceEvent>(_deleteResource);
 
     on<_ClearEvent>(_clear);
 
     _storeListener = store.onChange.listen((appState) {
-      add(UserGetInfoEvent.changeState(appState: appState));
+      add(ResourceEvent.changeState(appState: appState));
     });
 
-    final resource = getResource(store.state, request: fetchUserRequest) ??
-        ResourceModel(name: fetchUserRequest.resourceName);
+    final resource = getResource(store.state, request: params.request) ??
+        ResourceModel(id: params.request.resourceId);
 
     // ignore: invalid_use_of_visible_for_testing_member
     emit(
       state.copyWith(
         loaded: resource.loaded,
         loading: resource.loading,
-        user: resource.data,
+        data: resource.data,
         error: resource.error,
       ),
     );
@@ -60,28 +64,32 @@ class UserGetInfoBloc extends Bloc<UserGetInfoEvent, UserGetInfoState> {
   }
 
   void _changeState(_ChangeStateEvent event, emit) {
-    final resource = getResource(store.state, request: fetchUserRequest);
+    final resource = getResource(store.state, request: params.request);
 
     if (resource == null) {
       return;
+    }
+
+    final changeState = params.changeState;
+    if (changeState != null) {
+      changeState(store);
     }
 
     emit(
       state.copyWith(
         loaded: resource.loaded,
         loading: resource.loading,
-        user: resource.data,
+        data: resource.data,
         error: resource.error,
       ),
     );
   }
 
-  void _fetchUser(_FetchUserEvent event, emit) async {
+  void _fetch(_FetchDataEvent event, emit) async {
+    params.updateRequest(store: store, event: event);
+
     store.dispatch(
-      fetchResourceThunk(store,
-          request: fetchUserRequest.copyWith(
-            data: event.userId,
-          )),
+      fetchResourceThunk(store, request: params.request),
     );
   }
 
@@ -89,7 +97,7 @@ class UserGetInfoBloc extends Bloc<UserGetInfoEvent, UserGetInfoState> {
     store.dispatch(
       ResourcesAction.updateResource(
         resource: ResourceModel(
-          name: fetchUserRequest.resourceName,
+          id: params.request.resourceId,
           error: '',
           loaded: false,
         ),
@@ -100,7 +108,7 @@ class UserGetInfoBloc extends Bloc<UserGetInfoEvent, UserGetInfoState> {
   void _deleteResource(_DeleteResourceEvent event, emit) {
     store.dispatch(
       ResourcesAction.deleteResource(
-        resourceName: fetchUserRequest.resourceName,
+        resourceId: params.request.resourceId,
       ),
     );
   }
@@ -108,7 +116,7 @@ class UserGetInfoBloc extends Bloc<UserGetInfoEvent, UserGetInfoState> {
   void _clear(_ClearEvent event, emit) {
     store.dispatch(
       ResourcesAction.updateResource(
-        resource: ResourceModel(name: fetchUserRequest.resourceName),
+        resource: ResourceModel(id: params.request.resourceId),
       ),
     );
   }

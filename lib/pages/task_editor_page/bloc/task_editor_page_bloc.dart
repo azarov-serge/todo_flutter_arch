@@ -1,7 +1,7 @@
 import 'dart:async';
 
-// ignore: depend_on_referenced_packages
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:redux/redux.dart';
 // ignore: depend_on_referenced_packages
@@ -10,11 +10,9 @@ import 'package:bloc/bloc.dart';
 import 'package:todo/application/store/app_state.dart';
 import 'package:todo/application/store/resources/resources.dart';
 import 'package:todo/models/models.dart';
-import 'package:todo/shared/blocs/task/task.dart';
-import 'package:todo/shared/blocs/user/user.dart';
 
-import 'package:todo/shared/constants/global.dart';
 import 'package:todo/shared/di/di.dart';
+import 'package:todo/shared/resource_bloc/resource_bloc.dart';
 import 'package:todo/shared/services/services.dart';
 
 import 'task_editor_page_state.dart';
@@ -26,25 +24,33 @@ class TaskEditorPageBloc
     extends Bloc<TaskEditorPageEvent, TaskEditorPageState> {
   final Store<AppState> store;
 
-  final TaskCreateBloc taskCreateBloc;
-  final TaskUpdateBloc taskUpdateBloc;
-  final UserGetInfoBloc userBloc = getIt();
-  final TaskGetListBloc tasksBloc = getIt();
+  final ResourceBloc userBloc;
+  final ResourceBloc tasksBloc;
+  final ResourceBloc taskCreateBloc;
+  final ResourceBloc taskUpdateBloc;
 
   late final StreamSubscription<AppState> _storeListener;
 
+  bool _isSuccess = false;
+
   factory TaskEditorPageBloc.create({
-    required TaskCreateBloc taskCreateBloc,
-    required TaskUpdateBloc taskUpdateBloc,
+    required ResourceBloc userBloc,
+    required ResourceBloc tasksBloc,
+    required ResourceBloc taskCreateBloc,
+    required ResourceBloc taskUpdateBloc,
   }) =>
       TaskEditorPageBloc(
         store: getIt.get(),
+        userBloc: userBloc,
+        tasksBloc: tasksBloc,
         taskCreateBloc: taskCreateBloc,
         taskUpdateBloc: taskUpdateBloc,
       );
 
   TaskEditorPageBloc({
     required this.store,
+    required this.userBloc,
+    required this.tasksBloc,
     required this.taskCreateBloc,
     required this.taskUpdateBloc,
   }) : super(const TaskEditorPageState()) {
@@ -70,7 +76,7 @@ class TaskEditorPageBloc
 
   void _changeState(_ChangeStateEvent event, emit) {
     var task = state.task;
-    final user = userBloc.state.user;
+    final user = userBloc.state.data;
 
     event.appState.resourcesState.resources;
 
@@ -106,7 +112,7 @@ class TaskEditorPageBloc
 
   void _init(_InitEvent event, emit) {
     final id = event.id.isEmpty ? UniqueKey().toString() : event.id;
-    final List<TaskModel> tasks = tasksBloc.state.tasks;
+    final List<TaskModel> tasks = tasksBloc.state.data ?? [];
     TaskModel task = TaskModel.createEmpty();
 
     var request = taskCreateRequest.copyWith(id: id);
@@ -132,14 +138,21 @@ class TaskEditorPageBloc
 
   void _submit(_SubmitEvent event, emit) {
     final task = event.task;
+    final user = userBloc.state.data;
+
+    if (user == null) {
+      return;
+    }
 
     if (task.id.isEmpty) {
-      taskCreateBloc.add(TaskCreateEvent.create(task, state.id));
+      taskCreateBloc.add(
+        ResourceEvent.fetch({'task': task, 'id': state.id, 'userId': user.id}),
+      );
 
       return;
     }
 
-    taskUpdateBloc.add(TaskUpdateEvent.update(task));
+    taskUpdateBloc.add(ResourceEvent.fetch(task));
   }
 
   void _clearError(_ClearErrorEvent event, emit) {
@@ -150,11 +163,11 @@ class TaskEditorPageBloc
     }
 
     if (task.id.isEmpty) {
-      taskCreateBloc.add(const TaskCreateEvent.clearError());
+      taskCreateBloc.add(const ResourceEvent.clearError());
 
       return;
     }
 
-    taskCreateBloc.add(const TaskCreateEvent.clearError());
+    taskUpdateBloc.add(const ResourceEvent.clearError());
   }
 }

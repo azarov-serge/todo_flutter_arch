@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'task_create_state.dart';
+part of 'resource_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,32 +15,30 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$TaskCreateState {
+mixin _$ResourceState<D> {
   bool get loading => throw _privateConstructorUsedError;
   bool get loaded => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
-  TaskModel? get task => throw _privateConstructorUsedError;
+  D? get data => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TaskCreateStateCopyWith<TaskCreateState> get copyWith =>
+  $ResourceStateCopyWith<D, ResourceState<D>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TaskCreateStateCopyWith<$Res> {
-  factory $TaskCreateStateCopyWith(
-          TaskCreateState value, $Res Function(TaskCreateState) then) =
-      _$TaskCreateStateCopyWithImpl<$Res, TaskCreateState>;
+abstract class $ResourceStateCopyWith<D, $Res> {
+  factory $ResourceStateCopyWith(
+          ResourceState<D> value, $Res Function(ResourceState<D>) then) =
+      _$ResourceStateCopyWithImpl<D, $Res, ResourceState<D>>;
   @useResult
-  $Res call({bool loading, bool loaded, String error, TaskModel? task});
-
-  $TaskModelCopyWith<$Res>? get task;
+  $Res call({bool loading, bool loaded, String error, D? data});
 }
 
 /// @nodoc
-class _$TaskCreateStateCopyWithImpl<$Res, $Val extends TaskCreateState>
-    implements $TaskCreateStateCopyWith<$Res> {
-  _$TaskCreateStateCopyWithImpl(this._value, this._then);
+class _$ResourceStateCopyWithImpl<D, $Res, $Val extends ResourceState<D>>
+    implements $ResourceStateCopyWith<D, $Res> {
+  _$ResourceStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -53,7 +51,7 @@ class _$TaskCreateStateCopyWithImpl<$Res, $Val extends TaskCreateState>
     Object? loading = null,
     Object? loaded = null,
     Object? error = null,
-    Object? task = freezed,
+    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
       loading: null == loading
@@ -68,46 +66,31 @@ class _$TaskCreateStateCopyWithImpl<$Res, $Val extends TaskCreateState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
-      task: freezed == task
-          ? _value.task
-          : task // ignore: cast_nullable_to_non_nullable
-              as TaskModel?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as D?,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TaskModelCopyWith<$Res>? get task {
-    if (_value.task == null) {
-      return null;
-    }
-
-    return $TaskModelCopyWith<$Res>(_value.task!, (value) {
-      return _then(_value.copyWith(task: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$_TaskCreateStateCopyWith<$Res>
-    implements $TaskCreateStateCopyWith<$Res> {
-  factory _$$_TaskCreateStateCopyWith(
-          _$_TaskCreateState value, $Res Function(_$_TaskCreateState) then) =
-      __$$_TaskCreateStateCopyWithImpl<$Res>;
+abstract class _$$_ResourceStateCopyWith<D, $Res>
+    implements $ResourceStateCopyWith<D, $Res> {
+  factory _$$_ResourceStateCopyWith(
+          _$_ResourceState<D> value, $Res Function(_$_ResourceState<D>) then) =
+      __$$_ResourceStateCopyWithImpl<D, $Res>;
   @override
   @useResult
-  $Res call({bool loading, bool loaded, String error, TaskModel? task});
-
-  @override
-  $TaskModelCopyWith<$Res>? get task;
+  $Res call({bool loading, bool loaded, String error, D? data});
 }
 
 /// @nodoc
-class __$$_TaskCreateStateCopyWithImpl<$Res>
-    extends _$TaskCreateStateCopyWithImpl<$Res, _$_TaskCreateState>
-    implements _$$_TaskCreateStateCopyWith<$Res> {
-  __$$_TaskCreateStateCopyWithImpl(
-      _$_TaskCreateState _value, $Res Function(_$_TaskCreateState) _then)
+class __$$_ResourceStateCopyWithImpl<D, $Res>
+    extends _$ResourceStateCopyWithImpl<D, $Res, _$_ResourceState<D>>
+    implements _$$_ResourceStateCopyWith<D, $Res> {
+  __$$_ResourceStateCopyWithImpl(
+      _$_ResourceState<D> _value, $Res Function(_$_ResourceState<D>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -116,9 +99,9 @@ class __$$_TaskCreateStateCopyWithImpl<$Res>
     Object? loading = null,
     Object? loaded = null,
     Object? error = null,
-    Object? task = freezed,
+    Object? data = freezed,
   }) {
-    return _then(_$_TaskCreateState(
+    return _then(_$_ResourceState<D>(
       loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -131,19 +114,19 @@ class __$$_TaskCreateStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
-      task: freezed == task
-          ? _value.task
-          : task // ignore: cast_nullable_to_non_nullable
-              as TaskModel?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as D?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_TaskCreateState implements _TaskCreateState {
-  const _$_TaskCreateState(
-      {this.loading = false, this.loaded = false, this.error = '', this.task});
+class _$_ResourceState<D> implements _ResourceState<D> {
+  const _$_ResourceState(
+      {this.loading = false, this.loaded = false, this.error = '', this.data});
 
   @override
   @JsonKey()
@@ -155,40 +138,41 @@ class _$_TaskCreateState implements _TaskCreateState {
   @JsonKey()
   final String error;
   @override
-  final TaskModel? task;
+  final D? data;
 
   @override
   String toString() {
-    return 'TaskCreateState(loading: $loading, loaded: $loaded, error: $error, task: $task)';
+    return 'ResourceState<$D>(loading: $loading, loaded: $loaded, error: $error, data: $data)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TaskCreateState &&
+            other is _$_ResourceState<D> &&
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.loaded, loaded) || other.loaded == loaded) &&
             (identical(other.error, error) || other.error == error) &&
-            (identical(other.task, task) || other.task == task));
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, loading, loaded, error, task);
+  int get hashCode => Object.hash(runtimeType, loading, loaded, error,
+      const DeepCollectionEquality().hash(data));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TaskCreateStateCopyWith<_$_TaskCreateState> get copyWith =>
-      __$$_TaskCreateStateCopyWithImpl<_$_TaskCreateState>(this, _$identity);
+  _$$_ResourceStateCopyWith<D, _$_ResourceState<D>> get copyWith =>
+      __$$_ResourceStateCopyWithImpl<D, _$_ResourceState<D>>(this, _$identity);
 }
 
-abstract class _TaskCreateState implements TaskCreateState {
-  const factory _TaskCreateState(
+abstract class _ResourceState<D> implements ResourceState<D> {
+  const factory _ResourceState(
       {final bool loading,
       final bool loaded,
       final String error,
-      final TaskModel? task}) = _$_TaskCreateState;
+      final D? data}) = _$_ResourceState<D>;
 
   @override
   bool get loading;
@@ -197,9 +181,9 @@ abstract class _TaskCreateState implements TaskCreateState {
   @override
   String get error;
   @override
-  TaskModel? get task;
+  D? get data;
   @override
   @JsonKey(ignore: true)
-  _$$_TaskCreateStateCopyWith<_$_TaskCreateState> get copyWith =>
+  _$$_ResourceStateCopyWith<D, _$_ResourceState<D>> get copyWith =>
       throw _privateConstructorUsedError;
 }

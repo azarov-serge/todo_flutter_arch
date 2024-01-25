@@ -7,11 +7,11 @@ import 'package:redux/redux.dart';
 import 'package:bloc/bloc.dart';
 
 import 'package:todo/application/store/app_state.dart';
+import 'package:todo/models/models.dart';
 
-import 'package:todo/shared/blocs/auth/auth.dart';
-import 'package:todo/shared/blocs/user/user.dart';
 import 'package:todo/shared/constants/global.dart';
 import 'package:todo/shared/di/di.dart';
+import 'package:todo/shared/resource_bloc/resource_bloc.dart';
 
 import 'sign_up_page_state.dart';
 
@@ -20,21 +20,28 @@ part 'sign_up_page_bloc.freezed.dart';
 
 class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
   final Store<AppState> store;
-  final SignUpBloc signUpBloc;
+  final ResourceBloc signUpBloc;
+  final ResourceBloc userBloc;
 
-  final UserGetInfoBloc userBloc = getIt();
   bool _isSignUp = false;
 
   late final StreamSubscription<AppState> _storeListener;
 
-  factory SignUpPageBloc.create({required SignUpBloc signUpBloc}) =>
+  factory SignUpPageBloc.create({
+    required ResourceBloc signUpBloc,
+    required ResourceBloc userBloc,
+  }) =>
       SignUpPageBloc(
         store: getIt.get(),
         signUpBloc: signUpBloc,
+        userBloc: userBloc,
       );
 
-  SignUpPageBloc({required this.store, required this.signUpBloc})
-      : super(const SignUpPageState()) {
+  SignUpPageBloc({
+    required this.store,
+    required this.signUpBloc,
+    required this.userBloc,
+  }) : super(const SignUpPageState()) {
     on<_ChangeStateEvent>(_changeState);
 
     on<_SignUpEvent>(_signUp);
@@ -62,20 +69,22 @@ class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
       error = '$error\n ${userBloc.state.error}';
     }
 
+    final String? userId = signUpBloc.state.data;
     // Если авторизован, но нет пользователя, загружаем инфу по пользователю (или другие данные на старте проекта)
     if (signUpBloc.state.loaded &&
-        signUpBloc.state.userId.isNotEmpty &&
+        userId != null &&
         !userBloc.state.loading &&
         !userBloc.state.loaded &&
         !_isSignUp) {
       _isSignUp = true;
-      userBloc.add(UserGetInfoEvent.fetchUser(signUpBloc.state.userId));
+      userBloc.add(ResourceEvent.fetch(userId));
 
       return;
     }
 
+    final UserModel? user = userBloc.state.data;
     // Если произошел выход, очистить состояния
-    if (userBloc.state.loaded && _isSignUp && userBloc.state.user != null) {
+    if (userBloc.state.loaded && _isSignUp && user != null) {
       final currentState = navigatorKey.currentState;
       if (currentState == null) {
         return;
@@ -98,12 +107,12 @@ class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
 
   void _signUp(_SignUpEvent event, emit) {
     signUpBloc.add(
-      SignUpEvent.signUp(login: event.login, password: event.password),
+      ResourceEvent.fetch({'login': event.login, 'password': event.password}),
     );
   }
 
   void _clearError(_ClearErrorEvent event, emit) {
-    signUpBloc.add(const SignUpEvent.clearError());
-    userBloc.add(const UserGetInfoEvent.clearError());
+    signUpBloc.add(const ResourceEvent.clearError());
+    userBloc.add(const ResourceEvent.clearError());
   }
 }

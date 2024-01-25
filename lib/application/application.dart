@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/shared/blocs/auth/check_auth/check_auth_bloc.dart';
 
 import 'package:todo/shared/constants/global.dart';
-import 'package:todo/shared/di/di.dart';
+
+import 'package:todo/shared/resource_bloc/resource_bloc.dart';
+import 'package:todo/shared/resource_bloc/utils/utils.dart';
 
 import 'bloc/application_bloc.dart';
 import 'bloc/application_state.dart';
@@ -20,7 +21,15 @@ class Application extends StatelessWidget {
       providers: [
         BlocProvider<ApplicationBloc>(
           create: (BuildContext context) => ApplicationBloc.create(
-            authBloc: CheckAuthBloc.create(),
+            checkAuthBloc: ResourceBloc.create(
+              params: getCheckAuthResourceParams(),
+            ),
+            userBloc: ResourceBloc.create(
+              params: getUserInfoResourceParams(),
+            ),
+            signOutBloc: ResourceBloc.create(
+              params: getSignOutResourceParams(),
+            ),
           )..add(const ApplicationEvent.init()),
         ),
       ],

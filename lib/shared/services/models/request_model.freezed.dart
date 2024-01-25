@@ -28,7 +28,7 @@ mixin _$RequestModel {
   @JsonKey(name: 'url')
   String get url => throw _privateConstructorUsedError;
 
-  /// qyery параметры (?query=params)
+  /// query параметры (?query=params)
   @JsonKey(name: 'params')
   Map<String, String> get params => throw _privateConstructorUsedError;
 
@@ -205,10 +205,10 @@ class _$_RequestModel extends _RequestModel {
   @JsonKey(name: 'url')
   final String url;
 
-  /// qyery параметры (?query=params)
+  /// query параметры (?query=params)
   final Map<String, String> _params;
 
-  /// qyery параметры (?query=params)
+  /// query параметры (?query=params)
   @override
   @JsonKey(name: 'params')
   Map<String, String> get params {
@@ -305,7 +305,7 @@ abstract class _RequestModel extends RequestModel {
   String get url;
   @override
 
-  /// qyery параметры (?query=params)
+  /// query параметры (?query=params)
   @JsonKey(name: 'params')
   Map<String, String> get params;
   @override

@@ -31,8 +31,10 @@ class AuthServiceImpl implements AuthService {
       throw Exception('User not found');
     }
 
-    final user =
-        _hiveClient.userBox.values.firstWhere((user) => user.login == login);
+    final users =
+        _hiveClient.userBox.values.where((user) => user.login == login);
+
+    final user = users.isEmpty ? null : users.first;
 
     // ignore: unnecessary_null_comparison
     if (user == null) {

@@ -20,8 +20,8 @@ ResourceModel _$ResourceModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ResourceModel {
-  @JsonKey(name: 'name')
-  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'id')
+  String get id => throw _privateConstructorUsedError;
 
   /// true - идет запрос, false - запрос окончен
   @JsonKey(name: 'loading')
@@ -48,7 +48,7 @@ abstract class $ResourceModelCopyWith<$Res> {
       _$ResourceModelCopyWithImpl<$Res, ResourceModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'name') String name,
+      {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'loading') bool loading,
       @JsonKey(name: 'loaded') bool loaded,
       @JsonKey(name: 'data') dynamic data,
@@ -68,16 +68,16 @@ class _$ResourceModelCopyWithImpl<$Res, $Val extends ResourceModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? id = null,
     Object? loading = null,
     Object? loaded = null,
     Object? data = null,
     Object? error = null,
   }) {
     return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       loading: null == loading
           ? _value.loading
@@ -108,7 +108,7 @@ abstract class _$$_ResourceModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'name') String name,
+      {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'loading') bool loading,
       @JsonKey(name: 'loaded') bool loaded,
       @JsonKey(name: 'data') dynamic data,
@@ -126,16 +126,16 @@ class __$$_ResourceModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? id = null,
     Object? loading = null,
     Object? loaded = null,
     Object? data = null,
     Object? error = null,
   }) {
     return _then(_$_ResourceModel(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       loading: null == loading
           ? _value.loading
@@ -161,7 +161,7 @@ class __$$_ResourceModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ResourceModel extends _ResourceModel {
   const _$_ResourceModel(
-      {@JsonKey(name: 'name') required this.name,
+      {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'loading') this.loading = false,
       @JsonKey(name: 'loaded') this.loaded = false,
       @JsonKey(name: 'data') this.data,
@@ -172,8 +172,8 @@ class _$_ResourceModel extends _ResourceModel {
       _$$_ResourceModelFromJson(json);
 
   @override
-  @JsonKey(name: 'name')
-  final String name;
+  @JsonKey(name: 'id')
+  final String id;
 
   /// true - идет запрос, false - запрос окончен
   @override
@@ -193,7 +193,7 @@ class _$_ResourceModel extends _ResourceModel {
 
   @override
   String toString() {
-    return 'ResourceModel(name: $name, loading: $loading, loaded: $loaded, data: $data, error: $error)';
+    return 'ResourceModel(id: $id, loading: $loading, loaded: $loaded, data: $data, error: $error)';
   }
 
   @override
@@ -201,7 +201,7 @@ class _$_ResourceModel extends _ResourceModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ResourceModel &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.loaded, loaded) || other.loaded == loaded) &&
             const DeepCollectionEquality().equals(other.data, data) &&
@@ -210,7 +210,7 @@ class _$_ResourceModel extends _ResourceModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, loading, loaded,
+  int get hashCode => Object.hash(runtimeType, id, loading, loaded,
       const DeepCollectionEquality().hash(data), error);
 
   @JsonKey(ignore: true)
@@ -229,7 +229,7 @@ class _$_ResourceModel extends _ResourceModel {
 
 abstract class _ResourceModel extends ResourceModel {
   const factory _ResourceModel(
-      {@JsonKey(name: 'name') required final String name,
+      {@JsonKey(name: 'id') required final String id,
       @JsonKey(name: 'loading') final bool loading,
       @JsonKey(name: 'loaded') final bool loaded,
       @JsonKey(name: 'data') final dynamic data,
@@ -240,8 +240,8 @@ abstract class _ResourceModel extends ResourceModel {
       _$_ResourceModel.fromJson;
 
   @override
-  @JsonKey(name: 'name')
-  String get name;
+  @JsonKey(name: 'id')
+  String get id;
   @override
 
   /// true - идет запрос, false - запрос окончен

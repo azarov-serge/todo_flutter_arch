@@ -13,7 +13,8 @@ Future<void> fetchResourceThunk(
   required RequestModel request,
 }) async {
   var resource = ResourceModel(
-    name: request.resourceName,
+    id: request.resourceId,
+    loaded: false,
     loading: true,
     data: null,
     error: '',

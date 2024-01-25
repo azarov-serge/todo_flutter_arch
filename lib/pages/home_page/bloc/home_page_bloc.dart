@@ -8,12 +8,9 @@ import 'package:bloc/bloc.dart';
 
 import 'package:todo/application/store/app_state.dart';
 import 'package:todo/models/models.dart';
-import 'package:todo/shared/blocs/auth/auth.dart';
-
-import 'package:todo/shared/blocs/task/task.dart';
-import 'package:todo/shared/blocs/user/user.dart';
 
 import 'package:todo/shared/di/di.dart';
+import 'package:todo/shared/resource_bloc/resource_bloc.dart';
 
 import 'home_page_state.dart';
 
@@ -23,19 +20,32 @@ part 'home_page_bloc.freezed.dart';
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   final Store<AppState> store;
 
-  final SignOutBloc signOutBloc = getIt();
-  final UserGetInfoBloc userBloc = getIt();
-  final TaskGetListBloc tasksBloc = getIt();
+  final ResourceBloc signOutBloc;
+  final ResourceBloc userBloc;
+  final ResourceBloc tasksBloc;
 
   bool _inited = false;
 
   late final StreamSubscription<AppState> _storeListener;
 
-  factory HomePageBloc.create() => HomePageBloc(
+  factory HomePageBloc.create({
+    required final ResourceBloc signOutBloc,
+    required final ResourceBloc userBloc,
+    required final ResourceBloc tasksBloc,
+  }) =>
+      HomePageBloc(
         store: getIt.get(),
+        signOutBloc: signOutBloc,
+        userBloc: userBloc,
+        tasksBloc: tasksBloc,
       );
 
-  HomePageBloc({required this.store}) : super(const HomePageState()) {
+  HomePageBloc({
+    required this.store,
+    required this.signOutBloc,
+    required this.tasksBloc,
+    required this.userBloc,
+  }) : super(const HomePageState()) {
     on<_ChangeStateEvent>(_changeState);
 
     on<_SignOutEvent>(_signOut);
@@ -56,10 +66,10 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   }
 
   void _changeState(_ChangeStateEvent event, emit) {
-    final UserModel? user = userBloc.state.user;
+    final UserModel? user = userBloc.state.data;
 
-    final loading = signOutBloc.state.loading ||
-        (userBloc.state.loading && userBloc.state.user == null);
+    final loading =
+        signOutBloc.state.loading || (userBloc.state.loading && user == null);
 
     if (user != null &&
         !tasksBloc.state.loaded &&
@@ -80,19 +90,19 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   }
 
   void _signOut(_SignOutEvent event, emit) {
-    signOutBloc.add(const SignOutEvent.signOut());
+    signOutBloc.add(const ResourceEvent.fetch(null));
   }
 
   void _loadInitialData(_LoadInitialDataEvent event, emit) {
-    final UserModel? user = userBloc.state.user;
+    final UserModel? user = userBloc.state.data;
     if (user == null) {
       return;
     }
 
-    tasksBloc.add(TaskGetListEvent.fetchList(user.id));
+    tasksBloc.add(ResourceEvent.fetch(user.id));
   }
 
   void _clearError(_ClearErrorEvent event, emit) {
-    signOutBloc.add(const SignOutEvent.clearError());
+    signOutBloc.add(const ResourceEvent.clearError());
   }
 }

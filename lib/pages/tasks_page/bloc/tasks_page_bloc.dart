@@ -8,8 +8,8 @@ import 'package:bloc/bloc.dart';
 
 import 'package:todo/application/store/app_state.dart';
 
-import 'package:todo/shared/blocs/task/task.dart';
 import 'package:todo/shared/di/di.dart';
+import 'package:todo/shared/resource_bloc/resource_bloc.dart';
 
 import 'tasks_page_state.dart';
 
@@ -18,15 +18,22 @@ part 'tasks_page_bloc.freezed.dart';
 
 class TasksPageBloc extends Bloc<TasksPageEvent, TasksPageState> {
   final Store<AppState> store;
-  final TaskGetListBloc tasksBloc = getIt();
+  final ResourceBloc tasksBloc;
 
   late final StreamSubscription<AppState> _storeListener;
 
-  factory TasksPageBloc.create() => TasksPageBloc(
+  factory TasksPageBloc.create({
+    required final ResourceBloc tasksBloc,
+  }) =>
+      TasksPageBloc(
         store: getIt.get(),
+        tasksBloc: tasksBloc,
       );
 
-  TasksPageBloc({required this.store}) : super(const TasksPageState()) {
+  TasksPageBloc({
+    required this.store,
+    required this.tasksBloc,
+  }) : super(const TasksPageState()) {
     on<_ChangeStateEvent>(_changeState);
 
     on<_ClearErrorEvent>(_clearError);
@@ -39,7 +46,7 @@ class TasksPageBloc extends Bloc<TasksPageEvent, TasksPageState> {
     emit(
       state.copyWith(
         loading: tasksBloc.state.loading,
-        tasks: tasksBloc.state.tasks,
+        tasks: tasksBloc.state.data ?? [],
         error: tasksBloc.state.error,
       ),
     );
@@ -56,13 +63,13 @@ class TasksPageBloc extends Bloc<TasksPageEvent, TasksPageState> {
     emit(
       state.copyWith(
         loading: tasksBloc.state.loading,
-        tasks: tasksBloc.state.tasks,
+        tasks: tasksBloc.state.data ?? [],
         error: tasksBloc.state.error,
       ),
     );
   }
 
   void _clearError(_ClearErrorEvent event, emit) {
-    tasksBloc.add(const TaskGetListEvent.clearError());
+    tasksBloc.add(const ResourceEvent.clearError());
   }
 }

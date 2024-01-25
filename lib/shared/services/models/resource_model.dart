@@ -9,7 +9,7 @@ class ResourceModel with _$ResourceModel {
   const ResourceModel._();
 
   const factory ResourceModel({
-    @JsonKey(name: 'name') required String name,
+    @JsonKey(name: 'id') required String id,
 
     /// true - идет запрос, false - запрос окончен
     @JsonKey(name: 'loading') @Default(false) bool loading,
@@ -23,5 +23,5 @@ class ResourceModel with _$ResourceModel {
   factory ResourceModel.fromJson(Map<String, dynamic> json) =>
       _$ResourceModelFromJson(json);
 
-  createEmpty() => ResourceModel(name: name);
+  createEmpty() => ResourceModel(id: id);
 }

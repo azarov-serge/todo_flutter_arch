@@ -9,11 +9,6 @@ import 'package:todo/shared/services/hive_service/hive_client/hive_client_impl.d
 
 import 'package:todo/shared/services/services.dart';
 
-import 'package:todo/shared/blocs/auth/auth.dart';
-
-import 'package:todo/shared/blocs/user/user.dart';
-import 'package:todo/shared/blocs/task/task.dart';
-
 final GetIt getIt = GetIt.instance;
 
 void initDi() {
@@ -21,9 +16,4 @@ void initDi() {
   getIt.registerSingleton<FetchService>(HiveService());
 
   getIt.registerSingleton<Store<AppState>>(store());
-
-  getIt.registerLazySingleton(SignOutBloc.create);
-
-  getIt.registerLazySingleton(UserGetInfoBloc.create);
-  getIt.registerLazySingleton(TaskGetListBloc.create);
 }

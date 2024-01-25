@@ -8,7 +8,7 @@ const signOutRequest = RequestModel(url: 'auth/signOut');
 // #endregion
 
 // #region user
-const fetchUserRequest = RequestModel(url: 'user/fetchUser');
+const userGetInfoRequest = RequestModel(url: 'user/fetchUser');
 // #endregion
 
 // #region categories

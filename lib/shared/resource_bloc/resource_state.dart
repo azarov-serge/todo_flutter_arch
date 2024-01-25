@@ -1,14 +1,14 @@
 // ignore: depend_on_referenced_packages
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'sign_up_state.freezed.dart';
+part 'resource_state.freezed.dart';
 
 @freezed
-class SignUpState with _$SignUpState {
-  const factory SignUpState({
+class ResourceState<D> with _$ResourceState {
+  const factory ResourceState({
     @Default(false) bool loading,
     @Default(false) bool loaded,
     @Default('') String error,
-    @Default('') String userId,
-  }) = _SignUpState;
+    D? data,
+  }) = _ResourceState;
 }

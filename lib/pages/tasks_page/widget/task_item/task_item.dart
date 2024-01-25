@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:todo/application/router/router.dart';
 import 'package:todo/models/models.dart';
-import 'package:todo/shared/blocs/task/task.dart';
 
+import 'package:todo/shared/resource_bloc/resource_bloc.dart';
+import 'package:todo/shared/resource_bloc/resource_state.dart';
+import 'package:todo/shared/resource_bloc/utils/task_utils.dart';
 import 'package:todo/shared/ui_kit/ui_kit.dart';
 
 class TaskItem extends StatelessWidget {
@@ -13,9 +15,10 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<TaskDeleteBloc>(
-      create: (_) => TaskDeleteBloc.create(),
-      child: BlocListener<TaskDeleteBloc, TaskDeleteState>(
+    return BlocProvider<ResourceBloc>(
+      create: (_) =>
+          ResourceBloc.create(params: getTaskDeleteResourceParams(id: task.id)),
+      child: BlocListener<ResourceBloc, ResourceState>(
         listener: (ctx, state) {
           final error = state.error;
 
@@ -24,17 +27,15 @@ class TaskItem extends StatelessWidget {
               context,
               message: error,
               onPressed: (context) {
-                ctx
-                    .read<TaskDeleteBloc>()
-                    .add(const TaskDeleteEvent.clearError());
+                ctx.read<ResourceBloc>().add(const ResourceEvent.clearError());
                 Navigator.of(context).pop();
               },
             );
           }
         },
-        child: BlocBuilder<TaskDeleteBloc, TaskDeleteState>(
+        child: BlocBuilder<ResourceBloc, ResourceState>(
           builder: (ctx, state) {
-            final taskDeleteBloc = ctx.read<TaskDeleteBloc>();
+            final taskDeleteBloc = ctx.read<ResourceBloc>();
 
             return TaskCard(
               leading: SizedBox(
@@ -66,7 +67,7 @@ class TaskItem extends StatelessWidget {
                       child: TextButton(
                         child: const Icon(Icons.delete, color: Colors.red),
                         onPressed: () {
-                          taskDeleteBloc.add(TaskDeleteEvent.delete(task.id));
+                          taskDeleteBloc.add(ResourceEvent.fetch(task.id));
                         },
                       ),
                     ),

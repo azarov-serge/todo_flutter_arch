@@ -7,11 +7,11 @@ import 'package:redux/redux.dart';
 import 'package:bloc/bloc.dart';
 
 import 'package:todo/application/store/app_state.dart';
-import 'package:todo/shared/blocs/auth/auth.dart';
-import 'package:todo/shared/blocs/user/user.dart';
+import 'package:todo/models/models.dart';
 
 import 'package:todo/shared/constants/global.dart';
 import 'package:todo/shared/di/di.dart';
+import 'package:todo/shared/resource_bloc/resource_bloc.dart';
 
 import 'sign_in_page_state.dart';
 
@@ -20,21 +20,25 @@ part 'sign_in_page_bloc.freezed.dart';
 
 class SignInPageBloc extends Bloc<SignInPageEvent, SignInPageState> {
   final Store<AppState> store;
-  final SignInBloc signInBloc;
-
-  final UserGetInfoBloc userBloc = getIt();
+  final ResourceBloc signInBloc;
+  final ResourceBloc userBloc;
 
   bool _isSignIn = false;
 
   late final StreamSubscription<AppState> _storeListener;
 
-  factory SignInPageBloc.create({required SignInBloc signInBloc}) =>
+  factory SignInPageBloc.create({
+    required ResourceBloc signInBloc,
+    required ResourceBloc userBloc,
+  }) =>
       SignInPageBloc(
         store: getIt.get(),
         signInBloc: signInBloc,
+        userBloc: userBloc,
       );
 
-  SignInPageBloc({required this.store, required this.signInBloc})
+  SignInPageBloc(
+      {required this.store, required this.signInBloc, required this.userBloc})
       : super(const SignInPageState()) {
     on<_ChangeStateEvent>(_changeState);
 
@@ -48,7 +52,7 @@ class SignInPageBloc extends Bloc<SignInPageEvent, SignInPageState> {
 
   @override
   Future<void> close() async {
-    signInBloc.add(const SignInEvent.deleteResource());
+    signInBloc.add(const ResourceEvent.deleteResource());
     await _storeListener.cancel();
 
     return super.close();
@@ -65,20 +69,24 @@ class SignInPageBloc extends Bloc<SignInPageEvent, SignInPageState> {
       error = '$error\n ${userBloc.state.error}';
     }
 
+    final String? userId = signInBloc.state.data;
+
     // Если авторизован, но нет пользователя, загружаем инфу по пользователю (или другие данные на старте проекта)
     if (signInBloc.state.loaded &&
-        signInBloc.state.userId.isNotEmpty &&
+        userId != null &&
         !userBloc.state.loading &&
         !userBloc.state.loaded &&
         !_isSignIn) {
       _isSignIn = true;
-      userBloc.add(UserGetInfoEvent.fetchUser(signInBloc.state.userId));
+      userBloc.add(ResourceEvent.fetch(userId));
 
       return;
     }
 
+    final UserModel? user = userBloc.state.data;
+
     // Если произошел вход, вернуться на HomePage
-    if (userBloc.state.loaded && _isSignIn && userBloc.state.user != null) {
+    if (userBloc.state.loaded && _isSignIn && user != null) {
       final currentState = navigatorKey.currentState;
       if (currentState == null) {
         return;
@@ -97,12 +105,14 @@ class SignInPageBloc extends Bloc<SignInPageEvent, SignInPageState> {
 
   void _signIn(_SignInEvent event, emit) {
     signInBloc.add(
-      SignInEvent.signIn(login: event.login, password: event.password),
+      ResourceEvent.fetch(
+        {'login': event.login, 'password': event.password},
+      ),
     );
   }
 
   void _clearError(_ClearErrorEvent event, emit) {
-    signInBloc.add(const SignInEvent.clearError());
-    userBloc.add(const UserGetInfoEvent.clearError());
+    signInBloc.add(const ResourceEvent.clearError());
+    userBloc.add(const ResourceEvent.clearError());
   }
 }

@@ -19,21 +19,21 @@ mixin _$ResourcesAction {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ResourceModel resource) updateResource,
-    required TResult Function(String resourceName) deleteResource,
+    required TResult Function(String resourceId) deleteResource,
     required TResult Function() clear,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ResourceModel resource)? updateResource,
-    TResult? Function(String resourceName)? deleteResource,
+    TResult? Function(String resourceId)? deleteResource,
     TResult? Function()? clear,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ResourceModel resource)? updateResource,
-    TResult Function(String resourceName)? deleteResource,
+    TResult Function(String resourceId)? deleteResource,
     TResult Function()? clear,
     required TResult orElse(),
   }) =>
@@ -156,7 +156,7 @@ class _$_UpdateResource implements _UpdateResource {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ResourceModel resource) updateResource,
-    required TResult Function(String resourceName) deleteResource,
+    required TResult Function(String resourceId) deleteResource,
     required TResult Function() clear,
   }) {
     return updateResource(resource);
@@ -166,7 +166,7 @@ class _$_UpdateResource implements _UpdateResource {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ResourceModel resource)? updateResource,
-    TResult? Function(String resourceName)? deleteResource,
+    TResult? Function(String resourceId)? deleteResource,
     TResult? Function()? clear,
   }) {
     return updateResource?.call(resource);
@@ -176,7 +176,7 @@ class _$_UpdateResource implements _UpdateResource {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ResourceModel resource)? updateResource,
-    TResult Function(String resourceName)? deleteResource,
+    TResult Function(String resourceId)? deleteResource,
     TResult Function()? clear,
     required TResult orElse(),
   }) {
@@ -237,7 +237,7 @@ abstract class _$$_DeleteResourceCopyWith<$Res> {
           _$_DeleteResource value, $Res Function(_$_DeleteResource) then) =
       __$$_DeleteResourceCopyWithImpl<$Res>;
   @useResult
-  $Res call({String resourceName});
+  $Res call({String resourceId});
 }
 
 /// @nodoc
@@ -251,12 +251,12 @@ class __$$_DeleteResourceCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? resourceName = null,
+    Object? resourceId = null,
   }) {
     return _then(_$_DeleteResource(
-      resourceName: null == resourceName
-          ? _value.resourceName
-          : resourceName // ignore: cast_nullable_to_non_nullable
+      resourceId: null == resourceId
+          ? _value.resourceId
+          : resourceId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -265,14 +265,14 @@ class __$$_DeleteResourceCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_DeleteResource implements _DeleteResource {
-  const _$_DeleteResource({required this.resourceName});
+  const _$_DeleteResource({required this.resourceId});
 
   @override
-  final String resourceName;
+  final String resourceId;
 
   @override
   String toString() {
-    return 'ResourcesAction.deleteResource(resourceName: $resourceName)';
+    return 'ResourcesAction.deleteResource(resourceId: $resourceId)';
   }
 
   @override
@@ -280,12 +280,12 @@ class _$_DeleteResource implements _DeleteResource {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DeleteResource &&
-            (identical(other.resourceName, resourceName) ||
-                other.resourceName == resourceName));
+            (identical(other.resourceId, resourceId) ||
+                other.resourceId == resourceId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, resourceName);
+  int get hashCode => Object.hash(runtimeType, resourceId);
 
   @JsonKey(ignore: true)
   @override
@@ -297,32 +297,32 @@ class _$_DeleteResource implements _DeleteResource {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ResourceModel resource) updateResource,
-    required TResult Function(String resourceName) deleteResource,
+    required TResult Function(String resourceId) deleteResource,
     required TResult Function() clear,
   }) {
-    return deleteResource(resourceName);
+    return deleteResource(resourceId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ResourceModel resource)? updateResource,
-    TResult? Function(String resourceName)? deleteResource,
+    TResult? Function(String resourceId)? deleteResource,
     TResult? Function()? clear,
   }) {
-    return deleteResource?.call(resourceName);
+    return deleteResource?.call(resourceId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ResourceModel resource)? updateResource,
-    TResult Function(String resourceName)? deleteResource,
+    TResult Function(String resourceId)? deleteResource,
     TResult Function()? clear,
     required TResult orElse(),
   }) {
     if (deleteResource != null) {
-      return deleteResource(resourceName);
+      return deleteResource(resourceId);
     }
     return orElse();
   }
@@ -363,10 +363,10 @@ class _$_DeleteResource implements _DeleteResource {
 }
 
 abstract class _DeleteResource implements ResourcesAction {
-  const factory _DeleteResource({required final String resourceName}) =
+  const factory _DeleteResource({required final String resourceId}) =
       _$_DeleteResource;
 
-  String get resourceName;
+  String get resourceId;
   @JsonKey(ignore: true)
   _$$_DeleteResourceCopyWith<_$_DeleteResource> get copyWith =>
       throw _privateConstructorUsedError;
@@ -409,7 +409,7 @@ class _$_Clear implements _Clear {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ResourceModel resource) updateResource,
-    required TResult Function(String resourceName) deleteResource,
+    required TResult Function(String resourceId) deleteResource,
     required TResult Function() clear,
   }) {
     return clear();
@@ -419,7 +419,7 @@ class _$_Clear implements _Clear {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ResourceModel resource)? updateResource,
-    TResult? Function(String resourceName)? deleteResource,
+    TResult? Function(String resourceId)? deleteResource,
     TResult? Function()? clear,
   }) {
     return clear?.call();
@@ -429,7 +429,7 @@ class _$_Clear implements _Clear {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ResourceModel resource)? updateResource,
-    TResult Function(String resourceName)? deleteResource,
+    TResult Function(String resourceId)? deleteResource,
     TResult Function()? clear,
     required TResult orElse(),
   }) {

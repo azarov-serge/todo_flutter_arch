@@ -8,8 +8,8 @@ import 'package:todo/pages/sign_up_page/bloc/sign_up_page_bloc.dart';
 import 'package:todo/pages/tasks_page/bloc/tasks_page_bloc.dart';
 import 'package:todo/pages/task_editor_page/bloc/task_editor_page_bloc.dart';
 
-import 'package:todo/shared/blocs/auth/auth.dart';
-import 'package:todo/shared/blocs/task/task.dart';
+import 'package:todo/shared/resource_bloc/resource_bloc.dart';
+import 'package:todo/shared/resource_bloc/utils/utils.dart';
 
 const String homeRoute = '/';
 
@@ -36,10 +36,24 @@ class AppRouter {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (BuildContext context) => HomePageBloc.create(),
+                create: (BuildContext context) => HomePageBloc.create(
+                  userBloc: ResourceBloc.create(
+                    params: getUserInfoResourceParams(),
+                  ),
+                  tasksBloc: ResourceBloc.create(
+                    params: getTasksResourceParams(),
+                  ),
+                  signOutBloc: ResourceBloc.create(
+                    params: getSignOutResourceParams(),
+                  ),
+                ),
               ),
               BlocProvider(
-                create: (BuildContext context) => TasksPageBloc.create(),
+                create: (BuildContext context) => TasksPageBloc.create(
+                  tasksBloc: ResourceBloc.create(
+                    params: getTasksResourceParams(),
+                  ),
+                ),
               ),
             ],
             child: const HomePage(),
@@ -52,8 +66,18 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider<TaskEditorPageBloc>(
             create: (BuildContext context) => TaskEditorPageBloc.create(
-              taskCreateBloc: TaskCreateBloc.create(),
-              taskUpdateBloc: TaskUpdateBloc.create(),
+              taskCreateBloc: ResourceBloc.create(
+                params: getTaskCreateResourceParams(),
+              ),
+              taskUpdateBloc: ResourceBloc.create(
+                params: getTaskUpdateResourceParams(id: id),
+              ),
+              userBloc: ResourceBloc.create(
+                params: getUserInfoResourceParams(),
+              ),
+              tasksBloc: ResourceBloc.create(
+                params: getTasksResourceParams(),
+              ),
             )..add(
                 TaskEditorPageEvent.init(id),
               ),
@@ -65,7 +89,12 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider<SignInPageBloc>(
             create: (BuildContext context) => SignInPageBloc.create(
-              signInBloc: SignInBloc.create(),
+              signInBloc: ResourceBloc.create(
+                params: getSignInResourceParams(),
+              ),
+              userBloc: ResourceBloc.create(
+                params: getUserInfoResourceParams(),
+              ),
             ),
             child: const SignInPage(),
           ),
@@ -75,7 +104,12 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider<SignUpPageBloc>(
             create: (BuildContext context) => SignUpPageBloc.create(
-              signUpBloc: SignUpBloc.create(),
+              signUpBloc: ResourceBloc.create(
+                params: getSignUpResourceParams(),
+              ),
+              userBloc: ResourceBloc.create(
+                params: getUserInfoResourceParams(),
+              ),
             ),
             child: const SignUpPage(),
           ),
