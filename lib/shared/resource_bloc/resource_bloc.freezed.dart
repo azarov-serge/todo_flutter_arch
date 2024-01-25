@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'task_delete_bloc.dart';
+part of 'resource_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,11 +15,11 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$TaskDeleteEvent {
+mixin _$ResourceEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
-    required TResult Function(String id) delete,
+    required TResult Function(dynamic data) fetch,
     required TResult Function() clearError,
     required TResult Function() deleteResource,
     required TResult Function() clear,
@@ -28,7 +28,7 @@ mixin _$TaskDeleteEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
-    TResult? Function(String id)? delete,
+    TResult? Function(dynamic data)? fetch,
     TResult? Function()? clearError,
     TResult? Function()? deleteResource,
     TResult? Function()? clear,
@@ -37,7 +37,7 @@ mixin _$TaskDeleteEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
-    TResult Function(String id)? delete,
+    TResult Function(dynamic data)? fetch,
     TResult Function()? clearError,
     TResult Function()? deleteResource,
     TResult Function()? clear,
@@ -47,7 +47,7 @@ mixin _$TaskDeleteEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
-    required TResult Function(_DeleteEvent value) delete,
+    required TResult Function(_FetchDataEvent value) fetch,
     required TResult Function(_ClearErrorEvent value) clearError,
     required TResult Function(_DeleteResourceEvent value) deleteResource,
     required TResult Function(_ClearEvent value) clear,
@@ -56,7 +56,7 @@ mixin _$TaskDeleteEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
-    TResult? Function(_DeleteEvent value)? delete,
+    TResult? Function(_FetchDataEvent value)? fetch,
     TResult? Function(_ClearErrorEvent value)? clearError,
     TResult? Function(_DeleteResourceEvent value)? deleteResource,
     TResult? Function(_ClearEvent value)? clear,
@@ -65,7 +65,7 @@ mixin _$TaskDeleteEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
-    TResult Function(_DeleteEvent value)? delete,
+    TResult Function(_FetchDataEvent value)? fetch,
     TResult Function(_ClearErrorEvent value)? clearError,
     TResult Function(_DeleteResourceEvent value)? deleteResource,
     TResult Function(_ClearEvent value)? clear,
@@ -75,16 +75,16 @@ mixin _$TaskDeleteEvent {
 }
 
 /// @nodoc
-abstract class $TaskDeleteEventCopyWith<$Res> {
-  factory $TaskDeleteEventCopyWith(
-          TaskDeleteEvent value, $Res Function(TaskDeleteEvent) then) =
-      _$TaskDeleteEventCopyWithImpl<$Res, TaskDeleteEvent>;
+abstract class $ResourceEventCopyWith<$Res> {
+  factory $ResourceEventCopyWith(
+          ResourceEvent value, $Res Function(ResourceEvent) then) =
+      _$ResourceEventCopyWithImpl<$Res, ResourceEvent>;
 }
 
 /// @nodoc
-class _$TaskDeleteEventCopyWithImpl<$Res, $Val extends TaskDeleteEvent>
-    implements $TaskDeleteEventCopyWith<$Res> {
-  _$TaskDeleteEventCopyWithImpl(this._value, this._then);
+class _$ResourceEventCopyWithImpl<$Res, $Val extends ResourceEvent>
+    implements $ResourceEventCopyWith<$Res> {
+  _$ResourceEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -105,7 +105,7 @@ abstract class _$$_ChangeStateEventCopyWith<$Res> {
 
 /// @nodoc
 class __$$_ChangeStateEventCopyWithImpl<$Res>
-    extends _$TaskDeleteEventCopyWithImpl<$Res, _$_ChangeStateEvent>
+    extends _$ResourceEventCopyWithImpl<$Res, _$_ChangeStateEvent>
     implements _$$_ChangeStateEventCopyWith<$Res> {
   __$$_ChangeStateEventCopyWithImpl(
       _$_ChangeStateEvent _value, $Res Function(_$_ChangeStateEvent) _then)
@@ -143,7 +143,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
 
   @override
   String toString() {
-    return 'TaskDeleteEvent.changeState(appState: $appState)';
+    return 'ResourceEvent.changeState(appState: $appState)';
   }
 
   @override
@@ -168,7 +168,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
-    required TResult Function(String id) delete,
+    required TResult Function(dynamic data) fetch,
     required TResult Function() clearError,
     required TResult Function() deleteResource,
     required TResult Function() clear,
@@ -180,7 +180,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
-    TResult? Function(String id)? delete,
+    TResult? Function(dynamic data)? fetch,
     TResult? Function()? clearError,
     TResult? Function()? deleteResource,
     TResult? Function()? clear,
@@ -192,7 +192,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
-    TResult Function(String id)? delete,
+    TResult Function(dynamic data)? fetch,
     TResult Function()? clearError,
     TResult Function()? deleteResource,
     TResult Function()? clear,
@@ -208,7 +208,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
-    required TResult Function(_DeleteEvent value) delete,
+    required TResult Function(_FetchDataEvent value) fetch,
     required TResult Function(_ClearErrorEvent value) clearError,
     required TResult Function(_DeleteResourceEvent value) deleteResource,
     required TResult Function(_ClearEvent value) clear,
@@ -220,7 +220,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
-    TResult? Function(_DeleteEvent value)? delete,
+    TResult? Function(_FetchDataEvent value)? fetch,
     TResult? Function(_ClearErrorEvent value)? clearError,
     TResult? Function(_DeleteResourceEvent value)? deleteResource,
     TResult? Function(_ClearEvent value)? clear,
@@ -232,7 +232,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
-    TResult Function(_DeleteEvent value)? delete,
+    TResult Function(_FetchDataEvent value)? fetch,
     TResult Function(_ClearErrorEvent value)? clearError,
     TResult Function(_DeleteResourceEvent value)? deleteResource,
     TResult Function(_ClearEvent value)? clear,
@@ -245,7 +245,7 @@ class _$_ChangeStateEvent implements _ChangeStateEvent {
   }
 }
 
-abstract class _ChangeStateEvent implements TaskDeleteEvent {
+abstract class _ChangeStateEvent implements ResourceEvent {
   const factory _ChangeStateEvent({required final AppState appState}) =
       _$_ChangeStateEvent;
 
@@ -256,102 +256,103 @@ abstract class _ChangeStateEvent implements TaskDeleteEvent {
 }
 
 /// @nodoc
-abstract class _$$_DeleteEventCopyWith<$Res> {
-  factory _$$_DeleteEventCopyWith(
-          _$_DeleteEvent value, $Res Function(_$_DeleteEvent) then) =
-      __$$_DeleteEventCopyWithImpl<$Res>;
+abstract class _$$_FetchDataEventCopyWith<$Res> {
+  factory _$$_FetchDataEventCopyWith(
+          _$_FetchDataEvent value, $Res Function(_$_FetchDataEvent) then) =
+      __$$_FetchDataEventCopyWithImpl<$Res>;
   @useResult
-  $Res call({String id});
+  $Res call({dynamic data});
 }
 
 /// @nodoc
-class __$$_DeleteEventCopyWithImpl<$Res>
-    extends _$TaskDeleteEventCopyWithImpl<$Res, _$_DeleteEvent>
-    implements _$$_DeleteEventCopyWith<$Res> {
-  __$$_DeleteEventCopyWithImpl(
-      _$_DeleteEvent _value, $Res Function(_$_DeleteEvent) _then)
+class __$$_FetchDataEventCopyWithImpl<$Res>
+    extends _$ResourceEventCopyWithImpl<$Res, _$_FetchDataEvent>
+    implements _$$_FetchDataEventCopyWith<$Res> {
+  __$$_FetchDataEventCopyWithImpl(
+      _$_FetchDataEvent _value, $Res Function(_$_FetchDataEvent) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? data = null,
   }) {
-    return _then(_$_DeleteEvent(
-      null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$_FetchDataEvent(
+      null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_DeleteEvent implements _DeleteEvent {
-  const _$_DeleteEvent(this.id);
+class _$_FetchDataEvent implements _FetchDataEvent {
+  const _$_FetchDataEvent(this.data);
 
   @override
-  final String id;
+  final dynamic data;
 
   @override
   String toString() {
-    return 'TaskDeleteEvent.delete(id: $id)';
+    return 'ResourceEvent.fetch(data: $data)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeleteEvent &&
-            (identical(other.id, id) || other.id == id));
+            other is _$_FetchDataEvent &&
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeleteEventCopyWith<_$_DeleteEvent> get copyWith =>
-      __$$_DeleteEventCopyWithImpl<_$_DeleteEvent>(this, _$identity);
+  _$$_FetchDataEventCopyWith<_$_FetchDataEvent> get copyWith =>
+      __$$_FetchDataEventCopyWithImpl<_$_FetchDataEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
-    required TResult Function(String id) delete,
+    required TResult Function(dynamic data) fetch,
     required TResult Function() clearError,
     required TResult Function() deleteResource,
     required TResult Function() clear,
   }) {
-    return delete(id);
+    return fetch(data);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
-    TResult? Function(String id)? delete,
+    TResult? Function(dynamic data)? fetch,
     TResult? Function()? clearError,
     TResult? Function()? deleteResource,
     TResult? Function()? clear,
   }) {
-    return delete?.call(id);
+    return fetch?.call(data);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
-    TResult Function(String id)? delete,
+    TResult Function(dynamic data)? fetch,
     TResult Function()? clearError,
     TResult Function()? deleteResource,
     TResult Function()? clear,
     required TResult orElse(),
   }) {
-    if (delete != null) {
-      return delete(id);
+    if (fetch != null) {
+      return fetch(data);
     }
     return orElse();
   }
@@ -360,49 +361,49 @@ class _$_DeleteEvent implements _DeleteEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
-    required TResult Function(_DeleteEvent value) delete,
+    required TResult Function(_FetchDataEvent value) fetch,
     required TResult Function(_ClearErrorEvent value) clearError,
     required TResult Function(_DeleteResourceEvent value) deleteResource,
     required TResult Function(_ClearEvent value) clear,
   }) {
-    return delete(this);
+    return fetch(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
-    TResult? Function(_DeleteEvent value)? delete,
+    TResult? Function(_FetchDataEvent value)? fetch,
     TResult? Function(_ClearErrorEvent value)? clearError,
     TResult? Function(_DeleteResourceEvent value)? deleteResource,
     TResult? Function(_ClearEvent value)? clear,
   }) {
-    return delete?.call(this);
+    return fetch?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
-    TResult Function(_DeleteEvent value)? delete,
+    TResult Function(_FetchDataEvent value)? fetch,
     TResult Function(_ClearErrorEvent value)? clearError,
     TResult Function(_DeleteResourceEvent value)? deleteResource,
     TResult Function(_ClearEvent value)? clear,
     required TResult orElse(),
   }) {
-    if (delete != null) {
-      return delete(this);
+    if (fetch != null) {
+      return fetch(this);
     }
     return orElse();
   }
 }
 
-abstract class _DeleteEvent implements TaskDeleteEvent {
-  const factory _DeleteEvent(final String id) = _$_DeleteEvent;
+abstract class _FetchDataEvent implements ResourceEvent {
+  const factory _FetchDataEvent(final dynamic data) = _$_FetchDataEvent;
 
-  String get id;
+  dynamic get data;
   @JsonKey(ignore: true)
-  _$$_DeleteEventCopyWith<_$_DeleteEvent> get copyWith =>
+  _$$_FetchDataEventCopyWith<_$_FetchDataEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -415,7 +416,7 @@ abstract class _$$_ClearErrorEventCopyWith<$Res> {
 
 /// @nodoc
 class __$$_ClearErrorEventCopyWithImpl<$Res>
-    extends _$TaskDeleteEventCopyWithImpl<$Res, _$_ClearErrorEvent>
+    extends _$ResourceEventCopyWithImpl<$Res, _$_ClearErrorEvent>
     implements _$$_ClearErrorEventCopyWith<$Res> {
   __$$_ClearErrorEventCopyWithImpl(
       _$_ClearErrorEvent _value, $Res Function(_$_ClearErrorEvent) _then)
@@ -429,7 +430,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
 
   @override
   String toString() {
-    return 'TaskDeleteEvent.clearError()';
+    return 'ResourceEvent.clearError()';
   }
 
   @override
@@ -445,7 +446,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
-    required TResult Function(String id) delete,
+    required TResult Function(dynamic data) fetch,
     required TResult Function() clearError,
     required TResult Function() deleteResource,
     required TResult Function() clear,
@@ -457,7 +458,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
-    TResult? Function(String id)? delete,
+    TResult? Function(dynamic data)? fetch,
     TResult? Function()? clearError,
     TResult? Function()? deleteResource,
     TResult? Function()? clear,
@@ -469,7 +470,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
-    TResult Function(String id)? delete,
+    TResult Function(dynamic data)? fetch,
     TResult Function()? clearError,
     TResult Function()? deleteResource,
     TResult Function()? clear,
@@ -485,7 +486,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
-    required TResult Function(_DeleteEvent value) delete,
+    required TResult Function(_FetchDataEvent value) fetch,
     required TResult Function(_ClearErrorEvent value) clearError,
     required TResult Function(_DeleteResourceEvent value) deleteResource,
     required TResult Function(_ClearEvent value) clear,
@@ -497,7 +498,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
-    TResult? Function(_DeleteEvent value)? delete,
+    TResult? Function(_FetchDataEvent value)? fetch,
     TResult? Function(_ClearErrorEvent value)? clearError,
     TResult? Function(_DeleteResourceEvent value)? deleteResource,
     TResult? Function(_ClearEvent value)? clear,
@@ -509,7 +510,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
-    TResult Function(_DeleteEvent value)? delete,
+    TResult Function(_FetchDataEvent value)? fetch,
     TResult Function(_ClearErrorEvent value)? clearError,
     TResult Function(_DeleteResourceEvent value)? deleteResource,
     TResult Function(_ClearEvent value)? clear,
@@ -522,7 +523,7 @@ class _$_ClearErrorEvent implements _ClearErrorEvent {
   }
 }
 
-abstract class _ClearErrorEvent implements TaskDeleteEvent {
+abstract class _ClearErrorEvent implements ResourceEvent {
   const factory _ClearErrorEvent() = _$_ClearErrorEvent;
 }
 
@@ -535,7 +536,7 @@ abstract class _$$_DeleteResourceEventCopyWith<$Res> {
 
 /// @nodoc
 class __$$_DeleteResourceEventCopyWithImpl<$Res>
-    extends _$TaskDeleteEventCopyWithImpl<$Res, _$_DeleteResourceEvent>
+    extends _$ResourceEventCopyWithImpl<$Res, _$_DeleteResourceEvent>
     implements _$$_DeleteResourceEventCopyWith<$Res> {
   __$$_DeleteResourceEventCopyWithImpl(_$_DeleteResourceEvent _value,
       $Res Function(_$_DeleteResourceEvent) _then)
@@ -549,7 +550,7 @@ class _$_DeleteResourceEvent implements _DeleteResourceEvent {
 
   @override
   String toString() {
-    return 'TaskDeleteEvent.deleteResource()';
+    return 'ResourceEvent.deleteResource()';
   }
 
   @override
@@ -565,7 +566,7 @@ class _$_DeleteResourceEvent implements _DeleteResourceEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
-    required TResult Function(String id) delete,
+    required TResult Function(dynamic data) fetch,
     required TResult Function() clearError,
     required TResult Function() deleteResource,
     required TResult Function() clear,
@@ -577,7 +578,7 @@ class _$_DeleteResourceEvent implements _DeleteResourceEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
-    TResult? Function(String id)? delete,
+    TResult? Function(dynamic data)? fetch,
     TResult? Function()? clearError,
     TResult? Function()? deleteResource,
     TResult? Function()? clear,
@@ -589,7 +590,7 @@ class _$_DeleteResourceEvent implements _DeleteResourceEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
-    TResult Function(String id)? delete,
+    TResult Function(dynamic data)? fetch,
     TResult Function()? clearError,
     TResult Function()? deleteResource,
     TResult Function()? clear,
@@ -605,7 +606,7 @@ class _$_DeleteResourceEvent implements _DeleteResourceEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
-    required TResult Function(_DeleteEvent value) delete,
+    required TResult Function(_FetchDataEvent value) fetch,
     required TResult Function(_ClearErrorEvent value) clearError,
     required TResult Function(_DeleteResourceEvent value) deleteResource,
     required TResult Function(_ClearEvent value) clear,
@@ -617,7 +618,7 @@ class _$_DeleteResourceEvent implements _DeleteResourceEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
-    TResult? Function(_DeleteEvent value)? delete,
+    TResult? Function(_FetchDataEvent value)? fetch,
     TResult? Function(_ClearErrorEvent value)? clearError,
     TResult? Function(_DeleteResourceEvent value)? deleteResource,
     TResult? Function(_ClearEvent value)? clear,
@@ -629,7 +630,7 @@ class _$_DeleteResourceEvent implements _DeleteResourceEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
-    TResult Function(_DeleteEvent value)? delete,
+    TResult Function(_FetchDataEvent value)? fetch,
     TResult Function(_ClearErrorEvent value)? clearError,
     TResult Function(_DeleteResourceEvent value)? deleteResource,
     TResult Function(_ClearEvent value)? clear,
@@ -642,7 +643,7 @@ class _$_DeleteResourceEvent implements _DeleteResourceEvent {
   }
 }
 
-abstract class _DeleteResourceEvent implements TaskDeleteEvent {
+abstract class _DeleteResourceEvent implements ResourceEvent {
   const factory _DeleteResourceEvent() = _$_DeleteResourceEvent;
 }
 
@@ -655,7 +656,7 @@ abstract class _$$_ClearEventCopyWith<$Res> {
 
 /// @nodoc
 class __$$_ClearEventCopyWithImpl<$Res>
-    extends _$TaskDeleteEventCopyWithImpl<$Res, _$_ClearEvent>
+    extends _$ResourceEventCopyWithImpl<$Res, _$_ClearEvent>
     implements _$$_ClearEventCopyWith<$Res> {
   __$$_ClearEventCopyWithImpl(
       _$_ClearEvent _value, $Res Function(_$_ClearEvent) _then)
@@ -669,7 +670,7 @@ class _$_ClearEvent implements _ClearEvent {
 
   @override
   String toString() {
-    return 'TaskDeleteEvent.clear()';
+    return 'ResourceEvent.clear()';
   }
 
   @override
@@ -685,7 +686,7 @@ class _$_ClearEvent implements _ClearEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(AppState appState) changeState,
-    required TResult Function(String id) delete,
+    required TResult Function(dynamic data) fetch,
     required TResult Function() clearError,
     required TResult Function() deleteResource,
     required TResult Function() clear,
@@ -697,7 +698,7 @@ class _$_ClearEvent implements _ClearEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(AppState appState)? changeState,
-    TResult? Function(String id)? delete,
+    TResult? Function(dynamic data)? fetch,
     TResult? Function()? clearError,
     TResult? Function()? deleteResource,
     TResult? Function()? clear,
@@ -709,7 +710,7 @@ class _$_ClearEvent implements _ClearEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(AppState appState)? changeState,
-    TResult Function(String id)? delete,
+    TResult Function(dynamic data)? fetch,
     TResult Function()? clearError,
     TResult Function()? deleteResource,
     TResult Function()? clear,
@@ -725,7 +726,7 @@ class _$_ClearEvent implements _ClearEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ChangeStateEvent value) changeState,
-    required TResult Function(_DeleteEvent value) delete,
+    required TResult Function(_FetchDataEvent value) fetch,
     required TResult Function(_ClearErrorEvent value) clearError,
     required TResult Function(_DeleteResourceEvent value) deleteResource,
     required TResult Function(_ClearEvent value) clear,
@@ -737,7 +738,7 @@ class _$_ClearEvent implements _ClearEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ChangeStateEvent value)? changeState,
-    TResult? Function(_DeleteEvent value)? delete,
+    TResult? Function(_FetchDataEvent value)? fetch,
     TResult? Function(_ClearErrorEvent value)? clearError,
     TResult? Function(_DeleteResourceEvent value)? deleteResource,
     TResult? Function(_ClearEvent value)? clear,
@@ -749,7 +750,7 @@ class _$_ClearEvent implements _ClearEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ChangeStateEvent value)? changeState,
-    TResult Function(_DeleteEvent value)? delete,
+    TResult Function(_FetchDataEvent value)? fetch,
     TResult Function(_ClearErrorEvent value)? clearError,
     TResult Function(_DeleteResourceEvent value)? deleteResource,
     TResult Function(_ClearEvent value)? clear,
@@ -762,6 +763,6 @@ class _$_ClearEvent implements _ClearEvent {
   }
 }
 
-abstract class _ClearEvent implements TaskDeleteEvent {
+abstract class _ClearEvent implements ResourceEvent {
   const factory _ClearEvent() = _$_ClearEvent;
 }

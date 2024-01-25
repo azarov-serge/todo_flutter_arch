@@ -25,7 +25,7 @@ class TaskCard extends StatelessWidget {
                 children: [
                   Text(task.name),
                   Text(
-                    DateFormat('dd.MM.yyyy').format(task.createdAt),
+                    DateFormat('dd.MM.yyyy HH:MM:ss').format(task.createdAt),
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],

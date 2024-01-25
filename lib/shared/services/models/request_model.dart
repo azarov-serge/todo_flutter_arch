@@ -32,9 +32,9 @@ class RequestModel with _$RequestModel {
   factory RequestModel.fromJson(Map<String, dynamic> json) =>
       _$RequestModelFromJson(json);
 
-  get resourceName => '$method-$url-$id';
+  get resourceId => '$method-$url-$id';
 
-  static String createResourceName({
+  static String createResourceId({
     required String url,
     String method = 'GET',
     String id = '',

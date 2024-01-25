@@ -12,7 +12,7 @@ class ResourcesAction with _$ResourcesAction {
   }) = _UpdateResource;
 
   const factory ResourcesAction.deleteResource({
-    required String resourceName,
+    required String resourceId,
   }) = _DeleteResource;
 
   const factory ResourcesAction.clear() = _Clear;

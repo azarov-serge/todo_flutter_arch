@@ -6,11 +6,11 @@ ResourcesState resourcesReducer(ResourcesState state, dynamic action) {
     return action.maybeMap<ResourcesState>(
       updateResource: (payload) => state.copyWith(resources: {
         ...state.resources,
-        payload.resource.name: payload.resource
+        payload.resource.id: payload.resource
       }),
       deleteResource: (payload) {
         final resources = {...state.resources};
-        resources.remove(payload.resourceName);
+        resources.remove(payload.resourceId);
 
         return state.copyWith(resources: resources);
       },

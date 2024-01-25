@@ -52,7 +52,7 @@ class ResourceModel with _$ResourceModel {
   const ResourceModel._();
 
   const factory ResourceModel({
-    @JsonKey(name: 'name') required String name,
+    @JsonKey(name: 'id') required String id,
 
     /// true - идет запрос, false - запрос окончен
     @JsonKey(name: 'loading') @Default(false) bool loading,
@@ -66,7 +66,7 @@ class ResourceModel with _$ResourceModel {
   factory ResourceModel.fromJson(Map<String, dynamic> json) =>
       _$ResourceModelFromJson(json);
 
-  createEmpty() => ResourceModel(name: name);
+  createEmpty() => ResourceModel(id: name);
 }
 ```
 
@@ -102,9 +102,9 @@ class RequestModel with _$RequestModel {
   factory RequestModel.fromJson(Map<String, dynamic> json) =>
       _$RequestModelFromJson(json);
 
-  get resourceName => '$method-$url-$id';
+  get resourceId => '$method-$url-$id';
 
-  static String createResourceName({
+  static String createResourceId({
     required String url,
     String method = 'GET',
     String id = '',
@@ -158,22 +158,12 @@ class RequestModel with _$RequestModel {
 Содержит:
 
 - `/lib/shared/ui_kit/` - набор простых компонентов.
-- `/lib/shared/blocs/` - BLoCs приложения.
+- `/lib/shared/resource_bloc/` - BLoC по работе с ресурсами. При создании необходимо передать [параметры](#resource-bloc-params)
 
-  - `/lib/shared/blocs/auth/` - BLoC авторизации.
-    - `/lib/shared/blocs/auth/check_auth` - проверка авторизации.
-    - `/lib/shared/blocs/auth/sign_in` - авторизация.
-    - `/lib/shared/blocs/auth/sign_up` - регистрация.
-    - `/lib/shared/blocs/auth/sign_out` - выход.
-  - `/lib/shared/blocs/task/` - BLoC задач.
-
-    - `/lib/shared/blocs/task/get_list/` - получить список.
-    - `/lib/shared/blocs/task/create_item/` - создать задачу.
-    - `/lib/shared/blocs/task/update_item/` - обновить задачу.
-    - `/lib/shared/blocs/task/delete_item/` - удалить задачу.
-
-  - `/lib/shared/blocs/user/` - BLoC пользователь.
-    - `/lib/shared/blocs/user/user_get_info/` - получить информацию о пользователи.
+  - `/lib/shared/resource_bloc/utils/` - утилиты создания параметров.
+    - `/lib/shared/resource_bloc/auth_utils.dart` - утилиты создания параметров авторизации.
+    - `/lib/shared/resource_bloc/task_utils.dart` - утилиты создания параметров по работе с задачами.
+    - `/lib/shared/resource_bloc/user_utils.dart` - утилиты создания параметров по работе с пользователем.
 
 - `/lib/shared/utils/` - утилиты.
 - `/lib/shared/di/` - DI проекта.
@@ -189,3 +179,35 @@ class RequestModel with _$RequestModel {
   - `/lib/shared/services/requests.dart` - константы серевых запросов (RequestModel).
 
   - `/lib/shared/services/hive_service/` - имплиментация сервиса (Hive) с вспомогательными сераисами (auth, user, task). + Утилиты инициации сервиса и hiveClient.
+
+<a id="resource-bloc-params"></a>ResourceParamsModel
+
+```dart
+class ResourceParamsModel {
+  late RequestModel _request;
+  late RequestModel Function(dynamic event)? _requestUpdater;
+  late Function(Store<AppState> store)? changeState;
+  ResourceParamsModel({
+    required request,
+    this.changeState,
+    RequestModel Function(dynamic event)? requestUpdater,
+  }) {
+    _request = request;
+    _requestUpdater = requestUpdater;
+  }
+
+  RequestModel get request => _request;
+
+  void updateRequest({
+    required Store<AppState> store,
+    dynamic event,
+  }) {
+      final updater = _requestUpdater;
+      if (updater == null) {
+        return;
+      }
+
+      _request = updater(event);
+    }
+}
+```
